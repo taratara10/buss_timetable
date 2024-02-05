@@ -1,5 +1,22 @@
 import 'package:flutter/material.dart';
 
+class TimetableRow {
+  final int hour;
+  final List<int> minute;
+
+  TimetableRow(this.hour, this.minute);
+}
+
+class TimetableModel {
+  final List<TimetableRow> rows;
+
+  TimetableModel(this.rows);
+}
+
+var preview = TimetableModel([
+  TimetableRow(1, [1, 2]),
+]);
+
 class TimeTableScreen extends StatelessWidget {
   const TimeTableScreen({super.key});
 
@@ -28,15 +45,17 @@ class _TimeTableContent extends StatelessWidget {
             height: 50,
           ),
           const Text('時刻表'),
-          TimeTable(),
+          Timetable(preview),
         ]),
       ),
     );
   }
 }
 
-class TimeTable extends StatelessWidget {
-  TimeTable({super.key});
+class Timetable extends StatelessWidget {
+  TimetableModel data;
+
+  Timetable(this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +66,7 @@ class TimeTable extends StatelessWidget {
         1: FlexColumnWidth(3),
       },
       children: List.generate(
-        user.length,
+        data.rows.length,
         (index) => TableRow(
           children: [
             Text(user[index]),
