@@ -24,8 +24,10 @@ class _TimeTableContent extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Column(children: [
+          const SizedBox(
+            height: 50,
+          ),
           const Text('時刻表'),
-          Text('時刻表'),
           TimeTable(),
         ]),
       ),
@@ -40,6 +42,10 @@ class TimeTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Table(
       border: TableBorder.all(width: 1.0, color: Colors.black), // 枠線の設定
+      columnWidths: const {
+        0: FlexColumnWidth(1), // 列の幅の設定
+        1: FlexColumnWidth(3),
+      },
       children: List.generate(
         user.length,
         (index) => TableRow(
