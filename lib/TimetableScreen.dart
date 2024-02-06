@@ -9,12 +9,34 @@ class TimetableRow {
 
 class TimetableModel {
   final List<TimetableRow> rows;
+  final Day day = Day.weekday;
 
   TimetableModel(this.rows);
 }
 
-var preview = TimetableModel([
-  TimetableRow(1, [1, 2]),
+enum Day {
+  weekday,
+  saturday,
+  holiday,
+}
+
+TimetableModel preview = TimetableModel([
+  TimetableRow(6, [00, 15, 35, 55]),
+  TimetableRow(7, [10, 27, 47]),
+  TimetableRow(8, [06, 26, 46]),
+  TimetableRow(9, [10, 20]),
+  TimetableRow(10, [10, 20]),
+  TimetableRow(11, [10, 20]),
+  TimetableRow(12, [10, 20]),
+  TimetableRow(13, [10, 20]),
+  TimetableRow(14, [10, 20]),
+  TimetableRow(15, [10, 20]),
+  TimetableRow(16, [10, 20]),
+  TimetableRow(17, [10, 20]),
+  TimetableRow(18, [10, 20]),
+  TimetableRow(19, [10, 20]),
+  TimetableRow(20, [10, 20]),
+  TimetableRow(21, [10, 20]),
 ]);
 
 class TimeTableScreen extends StatelessWidget {
@@ -69,18 +91,11 @@ class Timetable extends StatelessWidget {
         data.rows.length,
         (index) => TableRow(
           children: [
-            Text(user[index]),
+            Text(data.rows[index].hour.toString()),
             Text("番号：$index"),
           ],
         ),
       ),
     );
   }
-
-  var user = [
-    "Taro",
-    "Hanako",
-    "Eri",
-    "Koji",
-  ];
 }
