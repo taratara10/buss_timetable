@@ -77,7 +77,7 @@ class _TimeTableContent extends StatelessWidget {
 class Timetable extends StatelessWidget {
   TimetableModel data;
 
-  Timetable(this.data);
+  Timetable(this.data, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -85,17 +85,33 @@ class Timetable extends StatelessWidget {
       border: TableBorder.all(width: 1.0, color: Colors.black), // 枠線の設定
       columnWidths: const {
         0: FlexColumnWidth(1), // 列の幅の設定
-        1: FlexColumnWidth(3),
+        1: FlexColumnWidth(5),
       },
-      children: List.generate(
-        data.rows.length,
-        (index) => TableRow(
-          children: [
-            Text(data.rows[index].hour.toString()),
-            Text("番号：$index"),
-          ],
-        ),
-      ),
+      children: generateRow(data),
     );
   }
+}
+
+List<TableRow> generateRow(TimetableModel timetable) {
+  return timetable.rows
+      .map(
+        (row) => TableRow(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Text(row.hour.toString()),
+            ),
+            Row(
+                children: row.minute
+                    .map(
+                      (item) => Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(item.toString().padLeft(2, '0')),
+                      ),
+                    )
+                    .toList()),
+          ],
+        ),
+      )
+      .toList();
 }
