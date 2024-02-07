@@ -1,3 +1,4 @@
+import 'package:buss_timetable/TimetableScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Pageaa'),
+      // home: const MyHomePage(title: 'Flutter Demo Home Pageaa'),
+      // todo デバッグ用
+      home: const TimeTableScreen(),
     );
   }
 }
