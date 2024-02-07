@@ -1,4 +1,4 @@
-import 'package:buss_timetable/TimetableScreen.dart';
+import 'package:buss_timetable/timetable_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
