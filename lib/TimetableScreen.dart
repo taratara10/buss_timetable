@@ -62,13 +62,15 @@ class _TimeTableContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(children: [
-          const SizedBox(
-            height: 50,
-          ),
-          const Text('時刻表'),
-          Timetable(preview),
-        ]),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          child: Column(children: [
+            const SizedBox(height: 50),
+            const Text('時刻表'),
+            const SizedBox(height: 16),
+            Timetable(preview),
+          ]),
+        ),
       ),
     );
   }
@@ -97,19 +99,22 @@ List<TableRow> generateRow(TimetableModel timetable) {
       .map(
         (row) => TableRow(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              color: Colors.blueGrey.shade50,
               child: Text(row.hour.toString()),
             ),
             Row(
-                children: row.minute
-                    .map(
-                      (item) => Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(item.toString().padLeft(2, '0')),
-                      ),
-                    )
-                    .toList()),
+              children: row.minute
+                  .map(
+                    (item) => Padding(
+                      padding: const EdgeInsets.only(left: 10, top: 4),
+                      child: Text(item.toString().padLeft(2, '0')),
+                    ),
+                  )
+                  .toList(),
+            )
           ],
         ),
       )
