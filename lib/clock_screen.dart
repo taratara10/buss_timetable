@@ -39,33 +39,28 @@ class ClockCard extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black45, width: 2),
           borderRadius: BorderRadius.circular(10)),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      child: const Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              RichText(
-                text: const TextSpan(
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.deepOrange,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '05:00',
-                      style: TextStyle(fontSize: 30.0),
-                    ),
-                    TextSpan(
-                      text: 'minutes',
-                      style: TextStyle(fontSize: 15.0),
-                    ),
-                  ],
+              Text(
+                '05:00',
+                style: TextStyle(
+                  fontSize: 45,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.deepOrange,
                 ),
               ),
-              Text('次のバスまで'),
+              Text('Next Buss..'),
             ],
           ),
+          Icon(
+            Icons.arrow_upward,
+            size: 50,
+          )
         ],
       ),
     );
