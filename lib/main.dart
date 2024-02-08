@@ -1,8 +1,10 @@
-import 'package:buss_timetable/TimetableScreen.dart';
+import 'package:buss_timetable/clock_screen.dart';
+import 'package:buss_timetable/timetable_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  // runApp(const MyApp());
+  runApp(ClockScreen());
 }
 
 class MyApp extends StatelessWidget {
