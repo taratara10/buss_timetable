@@ -1,3 +1,4 @@
+import 'package:buss_timetable/component/timeline.dart';
 import 'package:flutter/material.dart';
 
 class ClockScreen extends StatelessWidget {
@@ -23,7 +24,13 @@ class _ClockContent extends StatelessWidget {
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-          child: Column(children: [SizedBox(height: 50), ClockCard()]),
+          child: Column(
+            children: [
+              SizedBox(height: 50),
+              ClockCard(),
+              Timeline(),
+            ],
+          ),
         ),
       ),
     );
