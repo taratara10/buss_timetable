@@ -25,9 +25,18 @@ class _ClockContent extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 50),
               ClockCard(),
+              SizedBox(height: 32),
+              Text(
+                '次のバス',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+              SizedBox(height: 32),
               Timeline(),
             ],
           ),
