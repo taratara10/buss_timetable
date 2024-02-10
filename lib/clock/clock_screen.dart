@@ -1,4 +1,4 @@
-import 'package:buss_timetable/component/timeline.dart';
+import 'package:buss_timetable/clock/timeline.dart';
 import 'package:flutter/material.dart';
 
 class ClockScreen extends StatelessWidget {
