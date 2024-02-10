@@ -7,7 +7,47 @@ class Timeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _VerticalBussLine();
+    return _TimelineItem();
+  }
+}
+
+class _TimelineItem extends StatelessWidget {
+  const _TimelineItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _VerticalBussLine(),
+        _BussTimeInfo(),
+      ],
+    );
+  }
+}
+
+class _BussTimeInfo extends StatelessWidget {
+  const _BussTimeInfo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '13:00発',
+          style: TextStyle(
+            fontSize: 18,
+          ),
+        ),
+        Text(
+          '4分後',
+          style: TextStyle(
+            fontSize: 14,
+          ),
+        ),
+      ],
+    );
   }
 }
 
