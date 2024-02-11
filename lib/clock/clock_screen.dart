@@ -58,7 +58,7 @@ class ClockCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.read(clockViewModelProvider.notifier);
     final ClockUiState state = ref.watch(clockViewModelProvider);
-    final String min = state.minutes.toString();
+    final String min = '5';
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black45, width: 2),

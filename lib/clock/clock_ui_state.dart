@@ -1,3 +1,4 @@
+import 'package:buss_timetable/model/timetable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'clock_ui_state.freezed.dart';
@@ -6,8 +7,8 @@ part 'clock_ui_state.freezed.dart';
 /// `dart run build_runner build`
 @freezed
 class ClockUiState with _$ClockUiState {
-  // constで生成することでimmutableにする
-  const factory ClockUiState({
-    required int minutes,
+  // todo constで生成することでimmutableにしたい
+  factory ClockUiState({
+    required Timetable timetable,
   }) = _ClockUiState;
 }
