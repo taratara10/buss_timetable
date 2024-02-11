@@ -1,12 +1,15 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'clock_view_model.freezed.dart';
+import 'clock_ui_state.dart';
 
-/// 下記のコマンドで生成
-/// `dart run build_runner build`
-@freezed
-class ClockUiState with _$ClockUiState {
-  const factory ClockUiState({
-    required int minutes,
-  }) = _ClockUiState;
+part 'clock_view_model.g.dart';
+
+@riverpod
+class ClockViewModel extends _$ClockViewModel {
+  @override
+  ClockUiState build() {
+    return const ClockUiState(
+      minutes: 0,
+    );
+  }
 }
