@@ -9,7 +9,7 @@ class ClockViewModel extends _$ClockViewModel {
   @override
   ClockUiState build() {
     return const ClockUiState(
-      minutes: 0,
+      minutes: 5,
     );
   }
 }

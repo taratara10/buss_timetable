@@ -1,5 +1,8 @@
+import 'package:buss_timetable/clock/clock_ui_state.dart';
+import 'package:buss_timetable/clock/clock_view_model.dart';
 import 'package:buss_timetable/clock/timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ClockScreen extends StatelessWidget {
   const ClockScreen({super.key});
@@ -20,23 +23,23 @@ class ClockScreen extends StatelessWidget {
 class _ClockContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               ClockCard(),
-              SizedBox(height: 32),
-              Text(
+              const SizedBox(height: 32),
+              const Text(
                 '次のバス',
                 style: TextStyle(
                   fontSize: 18,
                 ),
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               Timeline(),
             ],
           ),
@@ -46,31 +49,36 @@ class _ClockContent extends StatelessWidget {
   }
 }
 
-class ClockCard extends StatelessWidget {
-  const ClockCard({super.key});
+class ClockCard extends ConsumerWidget {
+  ClockCard({super.key});
+
+  String a = 'aaa';
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.read(clockViewModelProvider.notifier);
+    final ClockUiState state = ref.watch(clockViewModelProvider);
+    final String min = state.minutes.toString();
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black45, width: 2),
           borderRadius: BorderRadius.circular(10)),
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: const Row(
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text('12:30発まで'),
               Text(
-                '05:00',
+                '0:0$min',
                 style: TextStyle(
                   fontSize: 45,
                   fontWeight: FontWeight.bold,
                   color: Colors.deepOrange,
                 ),
               ),
-              Text('Next Buss..'),
             ],
           ),
           Icon(
