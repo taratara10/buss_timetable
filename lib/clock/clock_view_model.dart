@@ -14,10 +14,18 @@ class ClockViewModel extends _$ClockViewModel {
   void startTimer() {
     _timer = Timer.periodic(
       // 第一引数 実行間隔
-      const Duration(milliseconds: 100),
+      const Duration(milliseconds: 500),
       // 第二引数 callback
       (timer) {
-        print('Timer tick ${timer.tick}');
+        // 現在時刻を取得
+        DateTime currentTime = DateTime.now();
+        state = state.copyWith(
+          remainingClock: remainingTime(
+            currentTime: currentTime,
+            target: DateTime.now().add(Duration(minutes: timer.tick)),
+          ),
+        );
+        print('Timer tick ${timer.tick}// $currentTime');
       },
     );
   }
@@ -30,12 +38,33 @@ class ClockViewModel extends _$ClockViewModel {
   //   state.
   // }
 
+  String remainingTime({
+    required DateTime currentTime,
+    required DateTime target,
+  }) {
+    Duration diff = target.difference(currentTime);
+    int minutes = diff.inMinutes;
+    int seconds = diff.inSeconds;
+    print('min $minutes .. sec $seconds');
+    if (minutes > 0) {
+      // 分を2桁の0埋めでフォーマット
+      String formattedMinutes = minutes.toString().padLeft(2, '0');
+      // 秒を2桁の0埋めでフォーマット
+      String formattedSeconds = seconds.toString().padLeft(2, '0');
+      // フォーマットされた時間を結合して返す
+      return '$formattedMinutes:$formattedSeconds';
+    } else {
+      return '';
+    }
+  }
+
   @override
   ClockUiState build() {
     // buildのタイミングがわからないので、これは安全？
     startTimer();
     return ClockUiState(
       timetable: weekDayTimetable,
+      remainingClock: '00:00',
     );
   }
 

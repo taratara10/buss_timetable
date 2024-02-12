@@ -10,5 +10,6 @@ class ClockUiState with _$ClockUiState {
   // todo constで生成することでimmutableにしたい
   factory ClockUiState({
     required Timetable timetable,
+    required String remainingClock,
   }) = _ClockUiState;
 }

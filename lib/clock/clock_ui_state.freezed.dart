@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ClockUiState {
   Timetable get timetable => throw _privateConstructorUsedError;
+  String get remainingClock => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ClockUiStateCopyWith<ClockUiState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $ClockUiStateCopyWith<$Res> {
           ClockUiState value, $Res Function(ClockUiState) then) =
       _$ClockUiStateCopyWithImpl<$Res, ClockUiState>;
   @useResult
-  $Res call({Timetable timetable});
+  $Res call({Timetable timetable, String remainingClock});
 }
 
 /// @nodoc
@@ -46,12 +47,17 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
   @override
   $Res call({
     Object? timetable = null,
+    Object? remainingClock = null,
   }) {
     return _then(_value.copyWith(
       timetable: null == timetable
           ? _value.timetable
           : timetable // ignore: cast_nullable_to_non_nullable
               as Timetable,
+      remainingClock: null == remainingClock
+          ? _value.remainingClock
+          : remainingClock // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -64,7 +70,7 @@ abstract class _$$ClockUiStateImplCopyWith<$Res>
       __$$ClockUiStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Timetable timetable});
+  $Res call({Timetable timetable, String remainingClock});
 }
 
 /// @nodoc
@@ -79,12 +85,17 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? timetable = null,
+    Object? remainingClock = null,
   }) {
     return _then(_$ClockUiStateImpl(
       timetable: null == timetable
           ? _value.timetable
           : timetable // ignore: cast_nullable_to_non_nullable
               as Timetable,
+      remainingClock: null == remainingClock
+          ? _value.remainingClock
+          : remainingClock // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -92,14 +103,16 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ClockUiStateImpl implements _ClockUiState {
-  const _$ClockUiStateImpl({required this.timetable});
+  _$ClockUiStateImpl({required this.timetable, required this.remainingClock});
 
   @override
   final Timetable timetable;
+  @override
+  final String remainingClock;
 
   @override
   String toString() {
-    return 'ClockUiState(timetable: $timetable)';
+    return 'ClockUiState(timetable: $timetable, remainingClock: $remainingClock)';
   }
 
   @override
@@ -108,11 +121,13 @@ class _$ClockUiStateImpl implements _ClockUiState {
         (other.runtimeType == runtimeType &&
             other is _$ClockUiStateImpl &&
             (identical(other.timetable, timetable) ||
-                other.timetable == timetable));
+                other.timetable == timetable) &&
+            (identical(other.remainingClock, remainingClock) ||
+                other.remainingClock == remainingClock));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, timetable);
+  int get hashCode => Object.hash(runtimeType, timetable, remainingClock);
 
   @JsonKey(ignore: true)
   @override
@@ -122,11 +137,14 @@ class _$ClockUiStateImpl implements _ClockUiState {
 }
 
 abstract class _ClockUiState implements ClockUiState {
-  const factory _ClockUiState({required final Timetable timetable}) =
-      _$ClockUiStateImpl;
+  factory _ClockUiState(
+      {required final Timetable timetable,
+      required final String remainingClock}) = _$ClockUiStateImpl;
 
   @override
   Timetable get timetable;
+  @override
+  String get remainingClock;
   @override
   @JsonKey(ignore: true)
   _$$ClockUiStateImplCopyWith<_$ClockUiStateImpl> get copyWith =>
