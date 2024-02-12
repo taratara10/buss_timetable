@@ -18,6 +18,8 @@ class ClockScreen extends StatelessWidget {
       home: _ClockContent(),
     );
   }
+
+// todo disposeでTimerを開放する
 }
 
 class _ClockContent extends StatelessWidget {

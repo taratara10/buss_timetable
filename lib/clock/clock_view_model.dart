@@ -17,15 +17,7 @@ class ClockViewModel extends _$ClockViewModel {
       const Duration(milliseconds: 500),
       // 第二引数 callback
       (timer) {
-        // 現在時刻を取得
-        DateTime currentTime = DateTime.now();
-        state = state.copyWith(
-          remainingClock: remainingTime(
-            currentTime: currentTime,
-            target: DateTime.now().add(Duration(minutes: timer.tick)),
-          ),
-        );
-        print('Timer tick ${timer.tick}// $currentTime');
+        updateTime();
       },
     );
   }
@@ -34,23 +26,39 @@ class ClockViewModel extends _$ClockViewModel {
     _timer.cancel();
   }
 
-  // void updateTime() {
-  //   state.
-  // }
+  void updateTime() {
+    // todo 固定値
+    int targetHour = 12;
+    int targetMinutes = 30;
 
-  String remainingTime({
+    DateTime now = DateTime.now();
+    DateTime targetTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      targetHour,
+      targetMinutes,
+    );
+    state = state.copyWith(
+      remainingClock: _remainingTime(
+        currentTime: now,
+        target: targetTime,
+      ),
+    );
+  }
+
+  String _remainingTime({
     required DateTime currentTime,
     required DateTime target,
   }) {
     Duration diff = target.difference(currentTime);
     int minutes = diff.inMinutes;
     int seconds = diff.inSeconds;
-    print('min $minutes .. sec $seconds');
-    if (minutes > 0) {
+    if (seconds > 0) {
       // 分を2桁の0埋めでフォーマット
       String formattedMinutes = minutes.toString().padLeft(2, '0');
       // 秒を2桁の0埋めでフォーマット
-      String formattedSeconds = seconds.toString().padLeft(2, '0');
+      String formattedSeconds = (seconds % 60).toString().padLeft(2, '0');
       // フォーマットされた時間を結合して返す
       return '$formattedMinutes:$formattedSeconds';
     } else {
