@@ -18,6 +18,8 @@ class ClockScreen extends StatelessWidget {
       home: _ClockContent(),
     );
   }
+
+// todo disposeでTimerを開放する
 }
 
 class _ClockContent extends StatelessWidget {
@@ -58,7 +60,7 @@ class ClockCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.read(clockViewModelProvider.notifier);
     final ClockUiState state = ref.watch(clockViewModelProvider);
-    final String min = state.minutes.toString();
+    final String min = state.remainingClock;
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black45, width: 2),
@@ -72,7 +74,7 @@ class ClockCard extends ConsumerWidget {
             children: [
               Text('12:30発まで'),
               Text(
-                '0:0$min',
+                '$min',
                 style: TextStyle(
                   fontSize: 45,
                   fontWeight: FontWeight.bold,

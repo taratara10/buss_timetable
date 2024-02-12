@@ -1,43 +1,5 @@
+import 'package:buss_timetable/model/timetable.dart';
 import 'package:flutter/material.dart';
-
-class TimetableRow {
-  final int hour;
-  final List<int> minute;
-
-  TimetableRow(this.hour, this.minute);
-}
-
-class TimetableModel {
-  final List<TimetableRow> rows;
-  final Day day = Day.weekday;
-
-  TimetableModel(this.rows);
-}
-
-enum Day {
-  weekday,
-  saturday,
-  holiday,
-}
-
-TimetableModel preview = TimetableModel([
-  TimetableRow(6, [00, 15, 35, 55]),
-  TimetableRow(7, [10, 27, 47]),
-  TimetableRow(8, [06, 26, 46]),
-  TimetableRow(9, [10, 20]),
-  TimetableRow(10, [10, 20]),
-  TimetableRow(11, [10, 20]),
-  TimetableRow(12, [10, 20]),
-  TimetableRow(13, [10, 20]),
-  TimetableRow(14, [10, 20]),
-  TimetableRow(15, [10, 20]),
-  TimetableRow(16, [10, 20]),
-  TimetableRow(17, [10, 20]),
-  TimetableRow(18, [10, 20]),
-  TimetableRow(19, [10, 20]),
-  TimetableRow(20, [10, 20]),
-  TimetableRow(21, [10, 20]),
-]);
 
 class TimeTableScreen extends StatelessWidget {
   const TimeTableScreen({super.key});
@@ -68,7 +30,7 @@ class _TimeTableContent extends StatelessWidget {
             const SizedBox(height: 50),
             const Text('時刻表'),
             const SizedBox(height: 16),
-            Timetable(preview),
+            TimetableWidget(weekDayTimetable),
           ]),
         ),
       ),
@@ -76,10 +38,10 @@ class _TimeTableContent extends StatelessWidget {
   }
 }
 
-class Timetable extends StatelessWidget {
-  TimetableModel data;
+class TimetableWidget extends StatelessWidget {
+  Timetable data;
 
-  Timetable(this.data, {super.key});
+  TimetableWidget(this.data, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +56,7 @@ class Timetable extends StatelessWidget {
   }
 }
 
-List<TableRow> generateRow(TimetableModel timetable) {
+List<TableRow> generateRow(Timetable timetable) {
   return timetable.rows
       .map(
         (row) => TableRow(

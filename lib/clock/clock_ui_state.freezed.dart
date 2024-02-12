@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ClockUiState {
-  int get minutes => throw _privateConstructorUsedError;
+  Timetable get timetable => throw _privateConstructorUsedError;
+  String get remainingClock => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ClockUiStateCopyWith<ClockUiState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $ClockUiStateCopyWith<$Res> {
           ClockUiState value, $Res Function(ClockUiState) then) =
       _$ClockUiStateCopyWithImpl<$Res, ClockUiState>;
   @useResult
-  $Res call({int minutes});
+  $Res call({Timetable timetable, String remainingClock});
 }
 
 /// @nodoc
@@ -45,13 +46,18 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? minutes = null,
+    Object? timetable = null,
+    Object? remainingClock = null,
   }) {
     return _then(_value.copyWith(
-      minutes: null == minutes
-          ? _value.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
-              as int,
+      timetable: null == timetable
+          ? _value.timetable
+          : timetable // ignore: cast_nullable_to_non_nullable
+              as Timetable,
+      remainingClock: null == remainingClock
+          ? _value.remainingClock
+          : remainingClock // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -64,7 +70,7 @@ abstract class _$$ClockUiStateImplCopyWith<$Res>
       __$$ClockUiStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int minutes});
+  $Res call({Timetable timetable, String remainingClock});
 }
 
 /// @nodoc
@@ -78,13 +84,18 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? minutes = null,
+    Object? timetable = null,
+    Object? remainingClock = null,
   }) {
     return _then(_$ClockUiStateImpl(
-      minutes: null == minutes
-          ? _value.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
-              as int,
+      timetable: null == timetable
+          ? _value.timetable
+          : timetable // ignore: cast_nullable_to_non_nullable
+              as Timetable,
+      remainingClock: null == remainingClock
+          ? _value.remainingClock
+          : remainingClock // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -92,14 +103,16 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ClockUiStateImpl implements _ClockUiState {
-  const _$ClockUiStateImpl({required this.minutes});
+  _$ClockUiStateImpl({required this.timetable, required this.remainingClock});
 
   @override
-  final int minutes;
+  final Timetable timetable;
+  @override
+  final String remainingClock;
 
   @override
   String toString() {
-    return 'ClockUiState(minutes: $minutes)';
+    return 'ClockUiState(timetable: $timetable, remainingClock: $remainingClock)';
   }
 
   @override
@@ -107,11 +120,14 @@ class _$ClockUiStateImpl implements _ClockUiState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ClockUiStateImpl &&
-            (identical(other.minutes, minutes) || other.minutes == minutes));
+            (identical(other.timetable, timetable) ||
+                other.timetable == timetable) &&
+            (identical(other.remainingClock, remainingClock) ||
+                other.remainingClock == remainingClock));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, minutes);
+  int get hashCode => Object.hash(runtimeType, timetable, remainingClock);
 
   @JsonKey(ignore: true)
   @override
@@ -121,11 +137,14 @@ class _$ClockUiStateImpl implements _ClockUiState {
 }
 
 abstract class _ClockUiState implements ClockUiState {
-  const factory _ClockUiState({required final int minutes}) =
-      _$ClockUiStateImpl;
+  factory _ClockUiState(
+      {required final Timetable timetable,
+      required final String remainingClock}) = _$ClockUiStateImpl;
 
   @override
-  int get minutes;
+  Timetable get timetable;
+  @override
+  String get remainingClock;
   @override
   @JsonKey(ignore: true)
   _$$ClockUiStateImplCopyWith<_$ClockUiStateImpl> get copyWith =>
