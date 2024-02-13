@@ -73,6 +73,9 @@ class ClockViewModel extends _$ClockViewModel {
     return ClockUiState(
       timetable: weekDayTimetable,
       remainingClock: '00:00',
+      timelines: [
+        TimelineState(departureTime: '14:00発', remainingTime: '25分後'),
+      ],
     );
   }
 

@@ -11,6 +11,7 @@ class ClockUiState with _$ClockUiState {
   factory ClockUiState({
     required Timetable timetable,
     required String remainingClock,
+    required List<TimelineState> timelines,
   }) = _ClockUiState;
 }
 

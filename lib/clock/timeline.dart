@@ -4,23 +4,20 @@ import 'package:buss_timetable/clock/clock_ui_state.dart';
 import 'package:flutter/material.dart';
 
 class Timeline extends StatelessWidget {
-  Timeline({super.key});
+  final TimelineState state;
 
-  final TimelineState s =
-      TimelineState(departureTime: '13:00発', remainingTime: '25分後');
+  const Timeline({super.key, required this.state});
 
   @override
   Widget build(BuildContext context) {
-    return _TimelineItem(
-      state: s,
-    );
+    return _TimelineItem(state: state);
   }
 }
 
 class _TimelineItem extends StatelessWidget {
   final TimelineState state;
 
-  _TimelineItem({required this.state});
+  const _TimelineItem({required this.state});
 
   @override
   Widget build(BuildContext context) {
