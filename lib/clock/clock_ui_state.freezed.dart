@@ -150,3 +150,141 @@ abstract class _ClockUiState implements ClockUiState {
   _$$ClockUiStateImplCopyWith<_$ClockUiStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$TimelineState {
+  String get departureTime => throw _privateConstructorUsedError;
+  String get remainingTime => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $TimelineStateCopyWith<TimelineState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TimelineStateCopyWith<$Res> {
+  factory $TimelineStateCopyWith(
+          TimelineState value, $Res Function(TimelineState) then) =
+      _$TimelineStateCopyWithImpl<$Res, TimelineState>;
+  @useResult
+  $Res call({String departureTime, String remainingTime});
+}
+
+/// @nodoc
+class _$TimelineStateCopyWithImpl<$Res, $Val extends TimelineState>
+    implements $TimelineStateCopyWith<$Res> {
+  _$TimelineStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? departureTime = null,
+    Object? remainingTime = null,
+  }) {
+    return _then(_value.copyWith(
+      departureTime: null == departureTime
+          ? _value.departureTime
+          : departureTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      remainingTime: null == remainingTime
+          ? _value.remainingTime
+          : remainingTime // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$TimelineStateImplCopyWith<$Res>
+    implements $TimelineStateCopyWith<$Res> {
+  factory _$$TimelineStateImplCopyWith(
+          _$TimelineStateImpl value, $Res Function(_$TimelineStateImpl) then) =
+      __$$TimelineStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String departureTime, String remainingTime});
+}
+
+/// @nodoc
+class __$$TimelineStateImplCopyWithImpl<$Res>
+    extends _$TimelineStateCopyWithImpl<$Res, _$TimelineStateImpl>
+    implements _$$TimelineStateImplCopyWith<$Res> {
+  __$$TimelineStateImplCopyWithImpl(
+      _$TimelineStateImpl _value, $Res Function(_$TimelineStateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? departureTime = null,
+    Object? remainingTime = null,
+  }) {
+    return _then(_$TimelineStateImpl(
+      departureTime: null == departureTime
+          ? _value.departureTime
+          : departureTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      remainingTime: null == remainingTime
+          ? _value.remainingTime
+          : remainingTime // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TimelineStateImpl implements _TimelineState {
+  _$TimelineStateImpl(
+      {required this.departureTime, required this.remainingTime});
+
+  @override
+  final String departureTime;
+  @override
+  final String remainingTime;
+
+  @override
+  String toString() {
+    return 'TimelineState(departureTime: $departureTime, remainingTime: $remainingTime)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TimelineStateImpl &&
+            (identical(other.departureTime, departureTime) ||
+                other.departureTime == departureTime) &&
+            (identical(other.remainingTime, remainingTime) ||
+                other.remainingTime == remainingTime));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, departureTime, remainingTime);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TimelineStateImplCopyWith<_$TimelineStateImpl> get copyWith =>
+      __$$TimelineStateImplCopyWithImpl<_$TimelineStateImpl>(this, _$identity);
+}
+
+abstract class _TimelineState implements TimelineState {
+  factory _TimelineState(
+      {required final String departureTime,
+      required final String remainingTime}) = _$TimelineStateImpl;
+
+  @override
+  String get departureTime;
+  @override
+  String get remainingTime;
+  @override
+  @JsonKey(ignore: true)
+  _$$TimelineStateImplCopyWith<_$TimelineStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
