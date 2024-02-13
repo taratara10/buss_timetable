@@ -22,9 +22,10 @@ class ClockScreen extends StatelessWidget {
 // todo disposeでTimerを開放する
 }
 
-class _ClockContent extends StatelessWidget {
+class _ClockContent extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ClockUiState state = ref.watch(clockViewModelProvider);
     return Scaffold(
       body: Center(
         child: Padding(
@@ -42,7 +43,7 @@ class _ClockContent extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              Timeline(),
+              Timeline(state: state.timelines.first),
             ],
           ),
         ),

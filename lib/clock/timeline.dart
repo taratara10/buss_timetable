@@ -1,50 +1,53 @@
 import 'dart:math' as math;
 
+import 'package:buss_timetable/clock/clock_ui_state.dart';
 import 'package:flutter/material.dart';
 
 class Timeline extends StatelessWidget {
-  const Timeline({super.key});
+  final TimelineState state;
+
+  const Timeline({super.key, required this.state});
 
   @override
   Widget build(BuildContext context) {
-    return _TimelineItem();
+    return _TimelineItem(state: state);
   }
 }
 
 class _TimelineItem extends StatelessWidget {
-  const _TimelineItem({super.key});
+  final TimelineState state;
+
+  const _TimelineItem({required this.state});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _VerticalBussLine(),
-        _BussTimeInfo(),
+        const _VerticalBussLine(),
+        _BussTimeInfo(state: state),
       ],
     );
   }
 }
 
 class _BussTimeInfo extends StatelessWidget {
-  const _BussTimeInfo({super.key});
+  final TimelineState state;
+
+  const _BussTimeInfo({required this.state});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '13:00発',
-          style: TextStyle(
-            fontSize: 18,
-          ),
+          state.departureTime,
+          style: const TextStyle(fontSize: 18),
         ),
         Text(
-          '4分後',
-          style: TextStyle(
-            fontSize: 14,
-          ),
+          state.remainingTime,
+          style: const TextStyle(fontSize: 14),
         ),
       ],
     );
@@ -53,7 +56,7 @@ class _BussTimeInfo extends StatelessWidget {
 
 /// ◯----- のような縦のタイムライン
 class _VerticalBussLine extends StatelessWidget {
-  const _VerticalBussLine({super.key});
+  const _VerticalBussLine();
 
   @override
   Widget build(BuildContext context) {
