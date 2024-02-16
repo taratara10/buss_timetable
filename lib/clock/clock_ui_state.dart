@@ -1,3 +1,4 @@
+import 'package:buss_timetable/extension/int_extenstion.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -33,6 +34,74 @@ extension DateTimeExtension on DateTime {
     return TimelineState(
       departureTime: '$hours:$min発',
       remainingTime: '$remainingTime分後',
+    );
+  }
+}
+
+extension TimetableExtension on Timetable {
+  List<TimelineState> getTimelineState({
+    required DateTime now,
+    required int numberOfResult,
+  }) {
+    List<TimelineState> result = [];
+
+    int currentHour = now.hour;
+    int currentMinute = now.minute;
+
+    for (TimetableRow row in rows) {
+      // 必要な数取得したら終了
+      if (result.length >= numberOfResult) break;
+
+      // 現在時刻と同じhour
+      if (row.hour == currentHour) {
+        for (int min in row.minute) {
+          // 現在時刻より未来のmin
+          if (min >= currentMinute) {
+            result.add(_createTimelineState(
+              now: now,
+              targetHour: row.hour,
+              targetMin: min,
+            ));
+          }
+        }
+      }
+
+      // 現在時刻より未来のhour
+      if (row.hour > currentHour) {
+        for (int min in row.minute) {
+          // 未来の時刻を結果に詰める
+          result.add(_createTimelineState(
+            now: now,
+            targetHour: row.hour,
+            targetMin: min,
+          ));
+        }
+      }
+    }
+
+    return result.take(numberOfResult).toList();
+  }
+
+  TimelineState _createTimelineState({
+    required DateTime now,
+    required int targetHour,
+    required int targetMin,
+  }) {
+    DateTime target = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      targetHour,
+      targetMin,
+    );
+
+    Duration duration = now.difference(target);
+    int diffMin = duration.inMinutes % 60;
+    int diffHour = duration.inHours;
+
+    return TimelineState(
+      departureTime: '${targetHour.toTwoDigit()}:${targetMin.toTwoDigit()}発',
+      remainingTime: '${diffHour.toTwoDigit()}時間${diffMin.toTwoDigit()}分後',
     );
   }
 }
