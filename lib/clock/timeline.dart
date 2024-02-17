@@ -98,7 +98,7 @@ class _VerticalBussLine extends StatelessWidget {
         ),
         Container(
           width: 4, // 線の幅
-          height: 100,
+          height: 300, //todo 可変にしたい
           color: Colors.blue, // 線の色
         ),
       ],

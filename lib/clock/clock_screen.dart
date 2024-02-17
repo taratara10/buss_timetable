@@ -65,7 +65,7 @@ class ClockCard extends ConsumerWidget {
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black45, width: 2),
           borderRadius: BorderRadius.circular(10)),
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -75,7 +75,7 @@ class ClockCard extends ConsumerWidget {
               Text('12:30発まで'),
               Text(
                 '$min',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 45,
                   fontWeight: FontWeight.bold,
                   color: Colors.deepOrange,
@@ -83,7 +83,7 @@ class ClockCard extends ConsumerWidget {
               ),
             ],
           ),
-          Icon(
+          const Icon(
             Icons.arrow_upward,
             size: 50,
           )
