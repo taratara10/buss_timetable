@@ -8,17 +8,36 @@ part 'clock_ui_state.freezed.dart';
 /// `dart run build_runner build`
 @freezed
 class ClockUiState with _$ClockUiState {
-  // todo constで生成することでimmutableにしたい
   factory ClockUiState({
-    required Timetable timetable,
-    required String remainingClock,
+    required ClockState clockState,
     required List<TimelineState> timelines,
   }) = _ClockUiState;
 }
 
 @freezed
+class ClockState with _$ClockState {
+  factory ClockState({
+    /// hh:mm発まで
+    required String departureTime,
+
+    /// format: mm:ss
+    required String remainingClock,
+  }) = _ClockState;
+
+  factory ClockState.empty() {
+    return ClockState(
+      departureTime: '',
+      remainingClock: '',
+    );
+  }
+}
+
+@freezed
 class TimelineState with _$TimelineState {
   factory TimelineState({
+    /// 出発時刻
+    required DateTime departure,
+
     /// format: hh:mm発
     required String departureTime,
 
@@ -28,6 +47,17 @@ class TimelineState with _$TimelineState {
 }
 
 extension TimetableExtension on Timetable {
+  ClockUiState toClockUiState({required DateTime now}) {
+    // 直近4本の時刻を取得
+    return ClockUiState(
+      clockState: ClockState.empty(),
+      timelines: toTimelineState(
+        now: now,
+        numberOfResult: 4,
+      ),
+    ).updateClockState(now: now);
+  }
+
   /// @see clock_ui_state_test.dart
   List<TimelineState> toTimelineState({
     required DateTime now,
@@ -93,8 +123,49 @@ extension TimetableExtension on Timetable {
         ? '${diffMin.toString()}分後'
         : '${diffHour.toString()}時間${diffMin.toString()}分後';
     return TimelineState(
+      departure: target,
       departureTime: '${targetHour.toTwoDigit()}:${targetMin.toTwoDigit()}発',
       remainingTime: remainingTime,
     );
+  }
+}
+
+extension ClockUiStateExtension on ClockUiState {
+  ClockUiState updateClockState({
+    required DateTime now,
+  }) {
+    TimelineState? next = timelines.firstOrNull;
+    if (next != null) {
+      return copyWith(
+        clockState: ClockState(
+          departureTime: '${next.departureTime}まで',
+          remainingClock: _getRemainingTime(now: now, target: next.departure),
+        ),
+      );
+    } else {
+      // emptyのstateに切り替えるとかしたほうがいいかも MVI
+      return this;
+    }
+  }
+
+  /// 現在からtargetまでの時刻を'mm:ss'のフォーマットを返す
+  String _getRemainingTime({
+    required DateTime now,
+    required DateTime target,
+  }) {
+    Duration diff = target.difference(now);
+    int minutes = diff.inMinutes;
+    int seconds = diff.inSeconds;
+    if (seconds > 0) {
+      // 分を2桁の0埋めでフォーマット
+      String formattedMinutes = minutes.toTwoDigit();
+      // 秒を2桁の0埋めでフォーマット
+      String formattedSeconds = (seconds % 60).toTwoDigit();
+      // フォーマットされた時間を結合して返す
+      return '$formattedMinutes:$formattedSeconds';
+    } else {
+      // todo
+      return 'このバスは出発済みです';
+    }
   }
 }

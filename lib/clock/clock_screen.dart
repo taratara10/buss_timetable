@@ -25,17 +25,17 @@ class ClockScreen extends StatelessWidget {
 class _ClockContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 50),
+              SizedBox(height: 50),
               ClockCard(),
-              const SizedBox(height: 32),
-              const Padding(
+              SizedBox(height: 32),
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,15 +61,12 @@ class _ClockContent extends ConsumerWidget {
 }
 
 class ClockCard extends ConsumerWidget {
-  ClockCard({super.key});
-
-  String a = 'aaa';
+  const ClockCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.read(clockViewModelProvider.notifier);
     final ClockUiState state = ref.watch(clockViewModelProvider);
-    final String min = state.remainingClock;
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black45, width: 2),
@@ -81,9 +78,9 @@ class ClockCard extends ConsumerWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('12:30発まで'),
+              Text(state.clockState.departureTime),
               Text(
-                '$min',
+                state.clockState.remainingClock,
                 style: const TextStyle(
                   fontSize: 45,
                   fontWeight: FontWeight.bold,
