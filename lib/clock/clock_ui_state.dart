@@ -19,27 +19,17 @@ class ClockUiState with _$ClockUiState {
 @freezed
 class TimelineState with _$TimelineState {
   factory TimelineState({
+    /// format: hh:mm発
     required String departureTime,
+
+    /// format: m分後 || h時間m分後
     required String remainingTime,
   }) = _TimelineState;
 }
 
-extension DateTimeExtension on DateTime {
-  /// 'hh:mm分後'の文字列を生成する
-  TimelineState toTimelineState(DateTime now) {
-    String hours = hour.toString().padLeft(2, '0');
-    String min = minute.toString().padLeft(2, '0');
-    int remainingMin = now.difference(this).inMinutes % 60;
-    String remainingTime = remainingMin.toString().padLeft(2, '0');
-    return TimelineState(
-      departureTime: '$hours:$min発',
-      remainingTime: '$remainingTime分後',
-    );
-  }
-}
-
 extension TimetableExtension on Timetable {
-  List<TimelineState> getTimelineState({
+  /// @see clock_ui_state_test.dart
+  List<TimelineState> toTimelineState({
     required DateTime now,
     required int numberOfResult,
   }) {
@@ -95,13 +85,16 @@ extension TimetableExtension on Timetable {
       targetMin,
     );
 
-    Duration duration = now.difference(target);
+    Duration duration = target.difference(now);
     int diffMin = duration.inMinutes % 60;
     int diffHour = duration.inHours;
 
+    String remainingTime = (diffHour <= 0)
+        ? '${diffMin.toString()}分後'
+        : '${diffHour.toString()}時間${diffMin.toString()}分後';
     return TimelineState(
       departureTime: '${targetHour.toTwoDigit()}:${targetMin.toTwoDigit()}発',
-      remainingTime: '${diffHour.toTwoDigit()}時間${diffMin.toTwoDigit()}分後',
+      remainingTime: remainingTime,
     );
   }
 }
