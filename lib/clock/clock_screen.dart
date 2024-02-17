@@ -26,6 +26,8 @@ class _ClockContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ClockUiState state = ref.watch(clockViewModelProvider);
+    // todo
+    var a = state.timelines.firstOrNull;
     return Scaffold(
       body: Center(
         child: Padding(
@@ -43,7 +45,7 @@ class _ClockContent extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              Timeline(state: state.timelines.first),
+              if (a != null) Timeline(state: a),
             ],
           ),
         ),
