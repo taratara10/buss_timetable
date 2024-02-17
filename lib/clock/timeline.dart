@@ -2,35 +2,62 @@ import 'dart:math' as math;
 
 import 'package:buss_timetable/clock/clock_ui_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Timeline extends StatelessWidget {
-  final TimelineState state;
+import 'clock_view_model.dart';
 
-  const Timeline({super.key, required this.state});
-
-  @override
-  Widget build(BuildContext context) {
-    return _TimelineItem(state: state);
-  }
-}
-
-class _TimelineItem extends StatelessWidget {
-  final TimelineState state;
-
-  const _TimelineItem({required this.state});
+class Timeline extends ConsumerWidget {
+  const Timeline({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const _VerticalBussLine(),
-        _BussTimeInfo(state: state),
-      ],
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ClockUiState state = ref.watch(clockViewModelProvider);
+    return _TimelineItem(
+      state: state.timelines,
+      index: 0,
     );
   }
 }
 
+class _TimelineItem extends StatelessWidget {
+  final List<TimelineState> state;
+  final int index;
+
+  const _TimelineItem({
+    required this.state,
+    required this.index,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    TimelineState? current = state.elementAtOrNull(index);
+    TimelineState? next = state.elementAtOrNull(index + 1);
+    return (current != null)
+        ? Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const _VerticalBussLine(),
+              const SizedBox(width: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _BussTimeInfo(state: current),
+                  const SizedBox(height: 16),
+                  (next != null)
+                      ? _TimelineItem(
+                          state: state,
+                          index: index + 1,
+                        )
+                      : const SizedBox()
+                ],
+              )
+            ],
+          )
+        : const SizedBox();
+  }
+}
+
+/// 発車時刻と残り時間
 class _BussTimeInfo extends StatelessWidget {
   final TimelineState state;
 
