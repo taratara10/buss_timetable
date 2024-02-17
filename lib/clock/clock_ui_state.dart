@@ -9,9 +9,27 @@ part 'clock_ui_state.freezed.dart';
 @freezed
 class ClockUiState with _$ClockUiState {
   factory ClockUiState({
-    required String remainingClock,
+    required ClockState clockState,
     required List<TimelineState> timelines,
   }) = _ClockUiState;
+}
+
+@freezed
+class ClockState with _$ClockState {
+  factory ClockState({
+    /// hh:mm発まで
+    required String departureTime,
+
+    /// format: mm:ss
+    required String remainingClock,
+  }) = _ClockState;
+
+  factory ClockState.empty() {
+    return ClockState(
+      departureTime: '',
+      remainingClock: '',
+    );
+  }
 }
 
 @freezed
@@ -32,12 +50,12 @@ extension TimetableExtension on Timetable {
   ClockUiState toClockUiState({required DateTime now}) {
     // 直近4本の時刻を取得
     return ClockUiState(
-      remainingClock: '',
+      clockState: ClockState.empty(),
       timelines: toTimelineState(
         now: now,
         numberOfResult: 4,
       ),
-    ).updateDepartureTime(now: now);
+    ).updateClockState(now: now);
   }
 
   /// @see clock_ui_state_test.dart
@@ -113,13 +131,17 @@ extension TimetableExtension on Timetable {
 }
 
 extension ClockUiStateExtension on ClockUiState {
-  ClockUiState updateDepartureTime({
+  ClockUiState updateClockState({
     required DateTime now,
   }) {
-    DateTime? next = timelines.firstOrNull?.departure;
+    TimelineState? next = timelines.firstOrNull;
     if (next != null) {
       return copyWith(
-          remainingClock: _getRemainingTime(now: now, target: next));
+        clockState: ClockState(
+          departureTime: '${next.departureTime}まで',
+          remainingClock: _getRemainingTime(now: now, target: next.departure),
+        ),
+      );
     } else {
       // emptyのstateに切り替えるとかしたほうがいいかも MVI
       return this;
@@ -142,6 +164,7 @@ extension ClockUiStateExtension on ClockUiState {
       // フォーマットされた時間を結合して返す
       return '$formattedMinutes:$formattedSeconds';
     } else {
+      // todo
       return 'このバスは出発済みです';
     }
   }

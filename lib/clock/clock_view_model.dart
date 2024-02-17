@@ -11,6 +11,7 @@ part 'clock_view_model.g.dart';
 @riverpod
 class ClockViewModel extends _$ClockViewModel {
   late Timer _timer;
+  late Timetable _timeTable;
 
   void startTimer() {
     _timer = Timer.periodic(
@@ -18,7 +19,17 @@ class ClockViewModel extends _$ClockViewModel {
       const Duration(milliseconds: 500),
       // 第二引数 callback
       (timer) {
-        updateTime();
+        // debug
+        // DateTime _now = DateTime.now();
+        // DateTime now = DateTime(_now.year, _now.month, _now.day, 12, 30);
+        DateTime now = clock.now();
+        if ((now.second % 60) == 0) {
+          // minの変わり目は、全体を再計算
+          state = _timeTable.toClockUiState(now: now);
+        } else {
+          // それ以外はclockのみ再計算
+          state = state.updateClockState(now: now);
+        }
       },
     );
   }
@@ -27,24 +38,9 @@ class ClockViewModel extends _$ClockViewModel {
     _timer.cancel();
   }
 
-  void updateTime() {
-    // todo 固定値
-    int targetHour = 12;
-    int targetMinutes = 30;
-
-    DateTime now = DateTime.now();
-    DateTime targetTime = DateTime(
-      now.year,
-      now.month,
-      now.day,
-      targetHour,
-      targetMinutes,
-    );
-    state = state.updateDepartureTime(now: clock.now());
-  }
-
   @override
   ClockUiState build() {
+    _timeTable = weekDayTimetable;
     // buildのタイミングがわからないので、これは安全？
     startTimer();
     return weekDayTimetable.toClockUiState(now: clock.now());
