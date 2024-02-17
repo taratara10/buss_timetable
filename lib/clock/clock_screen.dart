@@ -67,6 +67,12 @@ class ClockCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.read(clockViewModelProvider.notifier);
     final ClockUiState state = ref.watch(clockViewModelProvider);
+    final autoDisposeProvider = Provider.autoDispose((ref) {
+      ref.onDispose(() {
+        viewModel.cancelTimer();
+      });
+    });
+    
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black45, width: 2),

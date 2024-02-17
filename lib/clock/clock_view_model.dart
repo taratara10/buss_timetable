@@ -30,6 +30,8 @@ class ClockViewModel extends _$ClockViewModel {
           // それ以外はclockのみ再計算
           state = state.updateClockState(now: now);
         }
+        // todo debug 画面遷移時にcancelされるか確認する
+        print('--ss timer ${timer.tick}/ ${timer.isActive}');
       },
     );
   }
