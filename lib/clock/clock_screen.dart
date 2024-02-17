@@ -35,14 +35,23 @@ class _ClockContent extends ConsumerWidget {
               const SizedBox(height: 50),
               ClockCard(),
               const SizedBox(height: 32),
-              const Text(
-                '次のバス',
-                style: TextStyle(
-                  fontSize: 18,
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '次のバス',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 24),
+                    Timeline()
+                  ],
                 ),
               ),
-              const SizedBox(height: 32),
-              const Timeline(),
             ],
           ),
         ),

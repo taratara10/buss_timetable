@@ -37,18 +37,22 @@ class _TimelineItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const _VerticalBussLine(),
-              const SizedBox(width: 16),
+              const SizedBox(width: 8),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 2),
                   _BussTimeInfo(state: current),
-                  const SizedBox(height: 16),
-                  (next != null)
-                      ? _TimelineItem(
-                          state: state,
-                          index: index + 1,
-                        )
-                      : const SizedBox()
+                  const SizedBox(height: 32),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12),
+                    child: (next != null)
+                        ? _TimelineItem(
+                            state: state,
+                            index: index + 1,
+                          )
+                        : const SizedBox(),
+                  ),
                 ],
               )
             ],
@@ -70,7 +74,7 @@ class _BussTimeInfo extends StatelessWidget {
       children: [
         Text(
           state.departureTime,
-          style: const TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 20),
         ),
         Text(
           state.remainingTime,
@@ -90,14 +94,14 @@ class _VerticalBussLine extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          width: 24,
-          height: 24,
+          width: 32,
+          height: 32,
           child: CustomPaint(
             painter: _DonutCirclePainter(),
           ),
         ),
         Container(
-          width: 4, // 線の幅
+          width: 3, // 線の幅
           height: 300, //todo 可変にしたい
           color: Colors.blue, // 線の色
         ),
