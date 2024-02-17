@@ -6,7 +6,7 @@ part of 'clock_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$clockViewModelHash() => r'209bc38e02fd1dca1474a644b2d7cde2acf13c7a';
+String _$clockViewModelHash() => r'f619a7e81f2773cb89b4e649d826b6d83d21bd79';
 
 /// See also [ClockViewModel].
 @ProviderFor(ClockViewModel)
