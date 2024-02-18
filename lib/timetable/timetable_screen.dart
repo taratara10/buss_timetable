@@ -1,4 +1,4 @@
-import 'package:buss_timetable/BussThemeData.dart';
+import 'package:buss_timetable/buss_theme_data.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:flutter/material.dart';
 
