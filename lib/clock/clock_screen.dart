@@ -7,20 +7,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../BussThemeData.dart';
 
-class ClockScreen extends StatelessWidget {
-  const ClockScreen({super.key});
+class ClockRoute extends StatelessWidget {
+  const ClockRoute({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ClockScreen',
       theme: bussThemeData,
-      home: _ClockContent(),
+      home: _ClockScreen(),
     );
   }
 }
 
-class _ClockContent extends ConsumerWidget {
+class _ClockScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return const Scaffold(
@@ -112,7 +112,7 @@ class _NavigateButton extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const TimeTableScreen()),
+              MaterialPageRoute(builder: (context) => const TimetableRoute()),
             );
           },
           child: const Padding(
