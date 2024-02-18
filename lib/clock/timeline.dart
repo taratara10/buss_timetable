@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:buss_timetable/clock/clock_ui_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -100,7 +98,7 @@ class _VerticalBussLine extends StatelessWidget {
           height: 32,
           child: CustomPaint(
             painter: _DonutCirclePainter(
-              color: (isActive) ? Colors.orange : Colors.grey,
+              color: (isActive) ? Theme.of(context).primaryColor : Colors.grey,
             ),
           ),
         ),
@@ -130,15 +128,8 @@ class _DonutCirclePainter extends CustomPainter {
       ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = thickness;
-
     canvas.drawCircle(center, radius, paint);
-
-    const double angle = math.pi / 4;
-    final double x = center.dx + radius * math.cos(angle);
-    final double y = center.dy + radius * math.sin(angle);
-
     final double innerRadius = radius - thickness / 2;
-
     final Paint innerPaint = Paint()
       ..color = Colors.transparent
       ..style = PaintingStyle.stroke
