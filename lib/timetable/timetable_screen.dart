@@ -1,22 +1,8 @@
-import 'package:buss_timetable/BussThemeData.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:flutter/material.dart';
 
-class TimeTableScreen extends StatelessWidget {
-  const TimeTableScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TimeTableScreen',
-      theme: bussThemeData,
-      home: const _TimeTableContent(),
-    );
-  }
-}
-
-class _TimeTableContent extends StatelessWidget {
-  const _TimeTableContent();
+class TimetableRoute extends StatelessWidget {
+  const TimetableRoute({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +14,25 @@ class _TimeTableContent extends StatelessWidget {
             const SizedBox(height: 50),
             const Text('時刻表'),
             const SizedBox(height: 16),
-            TimetableWidget(weekDayTimetable),
+            _TimetableSection(weekDayTimetable),
           ]),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: const Icon(Icons.close),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }
 
-class TimetableWidget extends StatelessWidget {
+class _TimetableSection extends StatelessWidget {
   Timetable data;
 
-  TimetableWidget(this.data, {super.key});
+  _TimetableSection(this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +42,12 @@ class TimetableWidget extends StatelessWidget {
         0: FlexColumnWidth(1), // 列の幅の設定
         1: FlexColumnWidth(5),
       },
-      children: generateRow(data),
+      children: _generateRow(data),
     );
   }
 }
 
-List<TableRow> generateRow(Timetable timetable) {
+List<TableRow> _generateRow(Timetable timetable) {
   return timetable.rows
       .map(
         (row) => TableRow(

@@ -1,27 +1,17 @@
 import 'package:buss_timetable/clock/clock_ui_state.dart';
 import 'package:buss_timetable/clock/clock_view_model.dart';
-import 'package:buss_timetable/clock/timeline.dart';
+import 'package:buss_timetable/clock/timeline_section.dart';
+import 'package:buss_timetable/timetable/timetable_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../BussThemeData.dart';
+import '../widget/navigation_button.dart';
 
-class ClockScreen extends StatelessWidget {
-  const ClockScreen({super.key});
+class ClockRoute extends StatelessWidget {
+  const ClockRoute({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ClockScreen',
-      theme: bussThemeData,
-      home: _ClockContent(),
-    );
-  }
-}
-
-class _ClockContent extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
     return const Scaffold(
       body: Center(
         child: Padding(
@@ -34,21 +24,16 @@ class _ClockContent extends ConsumerWidget {
               SizedBox(height: 32),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '次のバス',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 24),
-                    Timeline()
-                  ],
+                child: TimelineSection(),
+              ),
+              Expanded(child: SizedBox()),
+              Center(
+                child: NavigateButton(
+                  route: TimetableRoute(),
+                  child: Text('時刻表'),
                 ),
               ),
+              SizedBox(height: 16),
             ],
           ),
         ),
