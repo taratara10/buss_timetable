@@ -1,22 +1,8 @@
-import 'package:buss_timetable/buss_theme_data.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:flutter/material.dart';
 
 class TimetableRoute extends StatelessWidget {
   const TimetableRoute({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TimeTableScreen',
-      theme: bussThemeData,
-      home: const _TimetableScreen(),
-    );
-  }
-}
-
-class _TimetableScreen extends StatelessWidget {
-  const _TimetableScreen();
 
   @override
   Widget build(BuildContext context) {

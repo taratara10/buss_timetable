@@ -5,7 +5,6 @@ import 'package:buss_timetable/timetable/timetable_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../buss_theme_data.dart';
 import '../widget/navigation_button.dart';
 
 class ClockRoute extends StatelessWidget {
@@ -13,17 +12,6 @@ class ClockRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ClockScreen',
-      theme: bussThemeData,
-      home: _ClockScreen(),
-    );
-  }
-}
-
-class _ClockScreen extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
     return const Scaffold(
       body: Center(
         child: Padding(
