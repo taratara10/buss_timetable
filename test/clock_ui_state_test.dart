@@ -22,9 +22,21 @@ void main() {
       expect(
         result,
         [
-          TimelineState(departureTime: '09:05発', remainingTime: '5分後'),
-          TimelineState(departureTime: '09:30発', remainingTime: '30分後'),
-          TimelineState(departureTime: '10:20発', remainingTime: '1時間20分後'),
+          TimelineState(
+            departure: DateTime(2024, 3, 3, 9, 5),
+            departureTime: '09:05発',
+            remainingTime: '5分後',
+          ),
+          TimelineState(
+            departure: DateTime(2024, 3, 3, 9, 30),
+            departureTime: '09:30発',
+            remainingTime: '30分後',
+          ),
+          TimelineState(
+            departure: DateTime(2024, 3, 3, 10, 20),
+            departureTime: '10:20発',
+            remainingTime: '1時間20分後',
+          ),
         ],
       );
     });

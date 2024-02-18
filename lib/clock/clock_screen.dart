@@ -4,6 +4,8 @@ import 'package:buss_timetable/clock/timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../BussThemeData.dart';
+
 class ClockScreen extends StatelessWidget {
   const ClockScreen({super.key});
 
@@ -11,15 +13,10 @@ class ClockScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ClockScreen',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: bussThemeData,
       home: _ClockContent(),
     );
   }
-
-// todo disposeでTimerを開放する
 }
 
 class _ClockContent extends ConsumerWidget {
@@ -72,25 +69,31 @@ class ClockCard extends ConsumerWidget {
         viewModel.cancelTimer();
       });
     });
-    
+
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.black45, width: 2),
+          color: Colors.grey.shade200,
+          border: Border.all(
+              color: Theme.of(context).colorScheme.primary, width: 2),
           borderRadius: BorderRadius.circular(10)),
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(state.clockState.departureTime),
+              Text(
+                state.clockState.departureTime,
+                style: const TextStyle(fontSize: 16),
+              ),
               Text(
                 state.clockState.remainingClock,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 45,
                   fontWeight: FontWeight.bold,
-                  color: Colors.deepOrange,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ],

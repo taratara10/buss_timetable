@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:buss_timetable/clock/clock_ui_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,7 +34,7 @@ class _TimelineItem extends StatelessWidget {
         ? Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const _VerticalBussLine(),
+              _VerticalBussLine(isActive: (index == 0)), // todo 動的に変化させたい
               const SizedBox(width: 8),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +85,9 @@ class _BussTimeInfo extends StatelessWidget {
 
 /// ◯----- のような縦のタイムライン
 class _VerticalBussLine extends StatelessWidget {
-  const _VerticalBussLine();
+  final bool isActive;
+
+  const _VerticalBussLine({required this.isActive});
 
   @override
   Widget build(BuildContext context) {
@@ -97,13 +97,15 @@ class _VerticalBussLine extends StatelessWidget {
           width: 32,
           height: 32,
           child: CustomPaint(
-            painter: _DonutCirclePainter(),
+            painter: _DonutCirclePainter(
+              color: (isActive) ? Theme.of(context).primaryColor : Colors.grey,
+            ),
           ),
         ),
         Container(
-          width: 3, // 線の幅
+          width: 2, // 線の幅
           height: 300, //todo 可変にしたい
-          color: Colors.blue, // 線の色
+          color: Colors.grey.withOpacity(0.5), // 線の色
         ),
       ],
     );
@@ -112,25 +114,22 @@ class _VerticalBussLine extends StatelessWidget {
 
 /// ドーナツ状のリング
 class _DonutCirclePainter extends CustomPainter {
+  final Color color;
+
+  const _DonutCirclePainter({required this.color});
+
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(Canvas canvas, size) {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = size.width / 4;
     const thickness = 3.0;
 
     final Paint paint = Paint()
-      ..color = Colors.blue
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = thickness;
-
     canvas.drawCircle(center, radius, paint);
-
-    const double angle = math.pi / 4;
-    final double x = center.dx + radius * math.cos(angle);
-    final double y = center.dy + radius * math.sin(angle);
-
     final double innerRadius = radius - thickness / 2;
-
     final Paint innerPaint = Paint()
       ..color = Colors.transparent
       ..style = PaintingStyle.stroke
