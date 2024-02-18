@@ -1,3 +1,4 @@
+import 'package:buss_timetable/BussThemeData.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:flutter/material.dart';
 
@@ -8,10 +9,7 @@ class TimeTableScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TimeTableScreen',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: bussThemeData,
       home: const _TimeTableContent(),
     );
   }
