@@ -1,6 +1,6 @@
 import 'package:buss_timetable/clock/clock_ui_state.dart';
 import 'package:buss_timetable/clock/clock_view_model.dart';
-import 'package:buss_timetable/clock/timeline.dart';
+import 'package:buss_timetable/clock/timeline_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -34,20 +34,7 @@ class _ClockContent extends ConsumerWidget {
               SizedBox(height: 32),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '次のバス',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 24),
-                    Timeline()
-                  ],
-                ),
+                child: TimelineSection(),
               ),
             ],
           ),

@@ -4,15 +4,28 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'clock_view_model.dart';
 
-class Timeline extends ConsumerWidget {
-  const Timeline({super.key});
+class TimelineSection extends ConsumerWidget {
+  const TimelineSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ClockUiState state = ref.watch(clockViewModelProvider);
-    return _TimelineItem(
-      state: state.timelines,
-      index: 0,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          '次のバス',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 24),
+        _TimelineItem(
+          state: state.timelines,
+          index: 0,
+        )
+      ],
     );
   }
 }
