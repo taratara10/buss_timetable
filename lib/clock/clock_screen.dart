@@ -1,6 +1,7 @@
 import 'package:buss_timetable/clock/clock_ui_state.dart';
 import 'package:buss_timetable/clock/clock_view_model.dart';
 import 'package:buss_timetable/clock/timeline_section.dart';
+import 'package:buss_timetable/timetable/timetable_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,6 +37,9 @@ class _ClockContent extends ConsumerWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: TimelineSection(),
               ),
+              Expanded(child: SizedBox()),
+              Center(child: _NavigateButton()),
+              SizedBox(height: 16),
             ],
           ),
         ),
@@ -90,6 +94,32 @@ class ClockCard extends ConsumerWidget {
             size: 50,
           )
         ],
+      ),
+    );
+  }
+}
+
+class _NavigateButton extends StatelessWidget {
+  const _NavigateButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32),
+      child: SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const TimeTableScreen()),
+            );
+          },
+          child: const Padding(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Text('時刻表'),
+          ),
+        ),
       ),
     );
   }
