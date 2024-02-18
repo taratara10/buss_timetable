@@ -36,7 +36,7 @@ class _TimelineItem extends StatelessWidget {
         ? Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const _VerticalBussLine(),
+              _VerticalBussLine(isActive: (index == 0)), // todo 動的に変化させたい
               const SizedBox(width: 8),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +87,9 @@ class _BussTimeInfo extends StatelessWidget {
 
 /// ◯----- のような縦のタイムライン
 class _VerticalBussLine extends StatelessWidget {
-  const _VerticalBussLine();
+  final bool isActive;
+
+  const _VerticalBussLine({required this.isActive});
 
   @override
   Widget build(BuildContext context) {
@@ -97,13 +99,15 @@ class _VerticalBussLine extends StatelessWidget {
           width: 32,
           height: 32,
           child: CustomPaint(
-            painter: _DonutCirclePainter(),
+            painter: _DonutCirclePainter(
+              color: (isActive) ? Colors.orange : Colors.grey,
+            ),
           ),
         ),
         Container(
-          width: 3, // 線の幅
+          width: 2, // 線の幅
           height: 300, //todo 可変にしたい
-          color: Colors.blue, // 線の色
+          color: Colors.grey.withOpacity(0.5), // 線の色
         ),
       ],
     );
@@ -112,14 +116,18 @@ class _VerticalBussLine extends StatelessWidget {
 
 /// ドーナツ状のリング
 class _DonutCirclePainter extends CustomPainter {
+  final Color color;
+
+  const _DonutCirclePainter({required this.color});
+
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(Canvas canvas, size) {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = size.width / 4;
     const thickness = 3.0;
 
     final Paint paint = Paint()
-      ..color = Colors.blue
+      ..color = color
       ..style = PaintingStyle.stroke
       ..strokeWidth = thickness;
 
