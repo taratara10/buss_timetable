@@ -1,11 +1,9 @@
+import 'package:buss_timetable/clock/clock_footer_section.dart';
 import 'package:buss_timetable/clock/clock_ui_state.dart';
 import 'package:buss_timetable/clock/clock_view_model.dart';
 import 'package:buss_timetable/clock/timeline_section.dart';
-import 'package:buss_timetable/timetable/timetable_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../widget/navigation_button.dart';
 
 class ClockRoute extends StatelessWidget {
   const ClockRoute({super.key});
@@ -27,12 +25,7 @@ class ClockRoute extends StatelessWidget {
                 child: TimelineSection(),
               ),
               Expanded(child: SizedBox()),
-              Center(
-                child: NavigateButton(
-                  route: TimetableRoute(),
-                  child: Text('時刻表'),
-                ),
-              ),
+              ClockFooterSection(),
               SizedBox(height: 16),
             ],
           ),
