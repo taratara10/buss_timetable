@@ -33,6 +33,14 @@ class ClockState with _$ClockState {
 }
 
 @freezed
+class StationItem with _$StationItem {
+  factory StationItem({
+    required bool isSelected,
+    required String name,
+  }) = _StationItem;
+}
+
+@freezed
 class TimelineState with _$TimelineState {
   factory TimelineState({
     /// 出発時刻

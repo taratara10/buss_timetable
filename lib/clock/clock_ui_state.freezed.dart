@@ -320,6 +320,142 @@ abstract class _ClockState implements ClockState {
 }
 
 /// @nodoc
+mixin _$StationItem {
+  bool get isSelected => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $StationItemCopyWith<StationItem> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $StationItemCopyWith<$Res> {
+  factory $StationItemCopyWith(
+          StationItem value, $Res Function(StationItem) then) =
+      _$StationItemCopyWithImpl<$Res, StationItem>;
+  @useResult
+  $Res call({bool isSelected, String name});
+}
+
+/// @nodoc
+class _$StationItemCopyWithImpl<$Res, $Val extends StationItem>
+    implements $StationItemCopyWith<$Res> {
+  _$StationItemCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isSelected = null,
+    Object? name = null,
+  }) {
+    return _then(_value.copyWith(
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$StationItemImplCopyWith<$Res>
+    implements $StationItemCopyWith<$Res> {
+  factory _$$StationItemImplCopyWith(
+          _$StationItemImpl value, $Res Function(_$StationItemImpl) then) =
+      __$$StationItemImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({bool isSelected, String name});
+}
+
+/// @nodoc
+class __$$StationItemImplCopyWithImpl<$Res>
+    extends _$StationItemCopyWithImpl<$Res, _$StationItemImpl>
+    implements _$$StationItemImplCopyWith<$Res> {
+  __$$StationItemImplCopyWithImpl(
+      _$StationItemImpl _value, $Res Function(_$StationItemImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isSelected = null,
+    Object? name = null,
+  }) {
+    return _then(_$StationItemImpl(
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$StationItemImpl implements _StationItem {
+  _$StationItemImpl({required this.isSelected, required this.name});
+
+  @override
+  final bool isSelected;
+  @override
+  final String name;
+
+  @override
+  String toString() {
+    return 'StationItem(isSelected: $isSelected, name: $name)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$StationItemImpl &&
+            (identical(other.isSelected, isSelected) ||
+                other.isSelected == isSelected) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isSelected, name);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$StationItemImplCopyWith<_$StationItemImpl> get copyWith =>
+      __$$StationItemImplCopyWithImpl<_$StationItemImpl>(this, _$identity);
+}
+
+abstract class _StationItem implements StationItem {
+  factory _StationItem(
+      {required final bool isSelected,
+      required final String name}) = _$StationItemImpl;
+
+  @override
+  bool get isSelected;
+  @override
+  String get name;
+  @override
+  @JsonKey(ignore: true)
+  _$$StationItemImplCopyWith<_$StationItemImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$TimelineState {
   /// 出発時刻
   DateTime get departure => throw _privateConstructorUsedError;
