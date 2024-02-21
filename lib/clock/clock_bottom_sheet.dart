@@ -20,7 +20,7 @@ void showClockBottomSheet(BuildContext context) {
             SizedBox(
               height: 200,
               child: _StationList(),
-            )
+            ),
           ],
         ),
       );
@@ -75,20 +75,24 @@ class _StationList extends ConsumerWidget {
           onTap: () {
             viewModel.onTap(item);
           },
-          child: Row(
-            children: [
-              Icon(
-                Icons.directions_bus,
-                color: (item.isSelected)
-                    ? Theme.of(context).primaryColor
-                    : Theme.of(context).disabledColor,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                item.name,
-                style: const TextStyle(fontSize: 20),
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.directions_bus,
+                  size: 32,
+                  color: (item.isSelected)
+                      ? Theme.of(context).primaryColor
+                      : Theme.of(context).disabledColor,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  item.name,
+                  style: const TextStyle(fontSize: 22),
+                ),
+              ],
+            ),
           ),
         );
       }).toList(),
