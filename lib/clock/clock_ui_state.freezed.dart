@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ClockUiState {
   ClockState get clockState => throw _privateConstructorUsedError;
   List<TimelineState> get timelines => throw _privateConstructorUsedError;
+  List<StationItem> get stations => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ClockUiStateCopyWith<ClockUiState> get copyWith =>
@@ -30,7 +31,10 @@ abstract class $ClockUiStateCopyWith<$Res> {
           ClockUiState value, $Res Function(ClockUiState) then) =
       _$ClockUiStateCopyWithImpl<$Res, ClockUiState>;
   @useResult
-  $Res call({ClockState clockState, List<TimelineState> timelines});
+  $Res call(
+      {ClockState clockState,
+      List<TimelineState> timelines,
+      List<StationItem> stations});
 
   $ClockStateCopyWith<$Res> get clockState;
 }
@@ -50,6 +54,7 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
   $Res call({
     Object? clockState = null,
     Object? timelines = null,
+    Object? stations = null,
   }) {
     return _then(_value.copyWith(
       clockState: null == clockState
@@ -60,6 +65,10 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
           ? _value.timelines
           : timelines // ignore: cast_nullable_to_non_nullable
               as List<TimelineState>,
+      stations: null == stations
+          ? _value.stations
+          : stations // ignore: cast_nullable_to_non_nullable
+              as List<StationItem>,
     ) as $Val);
   }
 
@@ -80,7 +89,10 @@ abstract class _$$ClockUiStateImplCopyWith<$Res>
       __$$ClockUiStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ClockState clockState, List<TimelineState> timelines});
+  $Res call(
+      {ClockState clockState,
+      List<TimelineState> timelines,
+      List<StationItem> stations});
 
   @override
   $ClockStateCopyWith<$Res> get clockState;
@@ -99,6 +111,7 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
   $Res call({
     Object? clockState = null,
     Object? timelines = null,
+    Object? stations = null,
   }) {
     return _then(_$ClockUiStateImpl(
       clockState: null == clockState
@@ -109,6 +122,10 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
           ? _value._timelines
           : timelines // ignore: cast_nullable_to_non_nullable
               as List<TimelineState>,
+      stations: null == stations
+          ? _value._stations
+          : stations // ignore: cast_nullable_to_non_nullable
+              as List<StationItem>,
     ));
   }
 }
@@ -117,8 +134,11 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
 
 class _$ClockUiStateImpl implements _ClockUiState {
   _$ClockUiStateImpl(
-      {required this.clockState, required final List<TimelineState> timelines})
-      : _timelines = timelines;
+      {required this.clockState,
+      required final List<TimelineState> timelines,
+      required final List<StationItem> stations})
+      : _timelines = timelines,
+        _stations = stations;
 
   @override
   final ClockState clockState;
@@ -130,9 +150,17 @@ class _$ClockUiStateImpl implements _ClockUiState {
     return EqualUnmodifiableListView(_timelines);
   }
 
+  final List<StationItem> _stations;
+  @override
+  List<StationItem> get stations {
+    if (_stations is EqualUnmodifiableListView) return _stations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_stations);
+  }
+
   @override
   String toString() {
-    return 'ClockUiState(clockState: $clockState, timelines: $timelines)';
+    return 'ClockUiState(clockState: $clockState, timelines: $timelines, stations: $stations)';
   }
 
   @override
@@ -143,12 +171,16 @@ class _$ClockUiStateImpl implements _ClockUiState {
             (identical(other.clockState, clockState) ||
                 other.clockState == clockState) &&
             const DeepCollectionEquality()
-                .equals(other._timelines, _timelines));
+                .equals(other._timelines, _timelines) &&
+            const DeepCollectionEquality().equals(other._stations, _stations));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, clockState, const DeepCollectionEquality().hash(_timelines));
+      runtimeType,
+      clockState,
+      const DeepCollectionEquality().hash(_timelines),
+      const DeepCollectionEquality().hash(_stations));
 
   @JsonKey(ignore: true)
   @override
@@ -160,12 +192,15 @@ class _$ClockUiStateImpl implements _ClockUiState {
 abstract class _ClockUiState implements ClockUiState {
   factory _ClockUiState(
       {required final ClockState clockState,
-      required final List<TimelineState> timelines}) = _$ClockUiStateImpl;
+      required final List<TimelineState> timelines,
+      required final List<StationItem> stations}) = _$ClockUiStateImpl;
 
   @override
   ClockState get clockState;
   @override
   List<TimelineState> get timelines;
+  @override
+  List<StationItem> get stations;
   @override
   @JsonKey(ignore: true)
   _$$ClockUiStateImplCopyWith<_$ClockUiStateImpl> get copyWith =>

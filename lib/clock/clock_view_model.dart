@@ -13,6 +13,14 @@ class ClockViewModel extends _$ClockViewModel {
   late Timer _timer;
   late Timetable _timeTable;
 
+  @override
+  ClockUiState build() {
+    _timeTable = weekDayTimetable;
+    // buildのタイミングがわからないので、これは安全？
+    startTimer();
+    return weekDayTimetable.toClockUiState(now: clock.now());
+  }
+
   void startTimer() {
     _timer = Timer.periodic(
       // 第一引数 実行間隔
@@ -40,11 +48,8 @@ class ClockViewModel extends _$ClockViewModel {
     _timer.cancel();
   }
 
-  @override
-  ClockUiState build() {
-    _timeTable = weekDayTimetable;
-    // buildのタイミングがわからないので、これは安全？
-    startTimer();
-    return weekDayTimetable.toClockUiState(now: clock.now());
+  void onTap(StationItem item) {
+    // todo
+    print('--ss aaaa $item');
   }
 }

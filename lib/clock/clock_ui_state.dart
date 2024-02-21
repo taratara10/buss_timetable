@@ -11,6 +11,7 @@ class ClockUiState with _$ClockUiState {
   factory ClockUiState({
     required ClockState clockState,
     required List<TimelineState> timelines,
+    required List<StationItem> stations,
   }) = _ClockUiState;
 }
 
@@ -63,6 +64,10 @@ extension TimetableExtension on Timetable {
         now: now,
         numberOfResult: 4,
       ),
+      stations: [
+        StationItem(isSelected: true, name: 'name'),
+        StationItem(isSelected: false, name: '津田沼'),
+      ],
     ).updateClockState(now: now);
   }
 
