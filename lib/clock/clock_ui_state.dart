@@ -11,6 +11,7 @@ class ClockUiState with _$ClockUiState {
   factory ClockUiState({
     required ClockState clockState,
     required List<TimelineState> timelines,
+    required BottomSheetState bottomSheetState,
   }) = _ClockUiState;
 }
 
@@ -30,6 +31,14 @@ class ClockState with _$ClockState {
       remainingClock: '',
     );
   }
+}
+
+@freezed
+class BottomSheetState with _$BottomSheetState {
+  factory BottomSheetState({
+    required String selectedStation,
+    required List<String> stations,
+  }) = _BottomSheetState;
 }
 
 @freezed
@@ -54,6 +63,13 @@ extension TimetableExtension on Timetable {
       timelines: toTimelineState(
         now: now,
         numberOfResult: 4,
+      ),
+      bottomSheetState: BottomSheetState(
+        selectedStation: '津田沼',
+        stations: [
+          '津田沼',
+          '田喜野井',
+        ],
       ),
     ).updateClockState(now: now);
   }

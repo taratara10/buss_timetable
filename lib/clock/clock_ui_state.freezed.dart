@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ClockUiState {
   ClockState get clockState => throw _privateConstructorUsedError;
   List<TimelineState> get timelines => throw _privateConstructorUsedError;
+  BottomSheetState get bottomSheetState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ClockUiStateCopyWith<ClockUiState> get copyWith =>
@@ -30,9 +31,13 @@ abstract class $ClockUiStateCopyWith<$Res> {
           ClockUiState value, $Res Function(ClockUiState) then) =
       _$ClockUiStateCopyWithImpl<$Res, ClockUiState>;
   @useResult
-  $Res call({ClockState clockState, List<TimelineState> timelines});
+  $Res call(
+      {ClockState clockState,
+      List<TimelineState> timelines,
+      BottomSheetState bottomSheetState});
 
   $ClockStateCopyWith<$Res> get clockState;
+  $BottomSheetStateCopyWith<$Res> get bottomSheetState;
 }
 
 /// @nodoc
@@ -50,6 +55,7 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
   $Res call({
     Object? clockState = null,
     Object? timelines = null,
+    Object? bottomSheetState = null,
   }) {
     return _then(_value.copyWith(
       clockState: null == clockState
@@ -60,6 +66,10 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
           ? _value.timelines
           : timelines // ignore: cast_nullable_to_non_nullable
               as List<TimelineState>,
+      bottomSheetState: null == bottomSheetState
+          ? _value.bottomSheetState
+          : bottomSheetState // ignore: cast_nullable_to_non_nullable
+              as BottomSheetState,
     ) as $Val);
   }
 
@@ -68,6 +78,14 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
   $ClockStateCopyWith<$Res> get clockState {
     return $ClockStateCopyWith<$Res>(_value.clockState, (value) {
       return _then(_value.copyWith(clockState: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BottomSheetStateCopyWith<$Res> get bottomSheetState {
+    return $BottomSheetStateCopyWith<$Res>(_value.bottomSheetState, (value) {
+      return _then(_value.copyWith(bottomSheetState: value) as $Val);
     });
   }
 }
@@ -80,10 +98,15 @@ abstract class _$$ClockUiStateImplCopyWith<$Res>
       __$$ClockUiStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ClockState clockState, List<TimelineState> timelines});
+  $Res call(
+      {ClockState clockState,
+      List<TimelineState> timelines,
+      BottomSheetState bottomSheetState});
 
   @override
   $ClockStateCopyWith<$Res> get clockState;
+  @override
+  $BottomSheetStateCopyWith<$Res> get bottomSheetState;
 }
 
 /// @nodoc
@@ -99,6 +122,7 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
   $Res call({
     Object? clockState = null,
     Object? timelines = null,
+    Object? bottomSheetState = null,
   }) {
     return _then(_$ClockUiStateImpl(
       clockState: null == clockState
@@ -109,6 +133,10 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
           ? _value._timelines
           : timelines // ignore: cast_nullable_to_non_nullable
               as List<TimelineState>,
+      bottomSheetState: null == bottomSheetState
+          ? _value.bottomSheetState
+          : bottomSheetState // ignore: cast_nullable_to_non_nullable
+              as BottomSheetState,
     ));
   }
 }
@@ -117,7 +145,9 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
 
 class _$ClockUiStateImpl implements _ClockUiState {
   _$ClockUiStateImpl(
-      {required this.clockState, required final List<TimelineState> timelines})
+      {required this.clockState,
+      required final List<TimelineState> timelines,
+      required this.bottomSheetState})
       : _timelines = timelines;
 
   @override
@@ -131,8 +161,11 @@ class _$ClockUiStateImpl implements _ClockUiState {
   }
 
   @override
+  final BottomSheetState bottomSheetState;
+
+  @override
   String toString() {
-    return 'ClockUiState(clockState: $clockState, timelines: $timelines)';
+    return 'ClockUiState(clockState: $clockState, timelines: $timelines, bottomSheetState: $bottomSheetState)';
   }
 
   @override
@@ -143,12 +176,14 @@ class _$ClockUiStateImpl implements _ClockUiState {
             (identical(other.clockState, clockState) ||
                 other.clockState == clockState) &&
             const DeepCollectionEquality()
-                .equals(other._timelines, _timelines));
+                .equals(other._timelines, _timelines) &&
+            (identical(other.bottomSheetState, bottomSheetState) ||
+                other.bottomSheetState == bottomSheetState));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, clockState, const DeepCollectionEquality().hash(_timelines));
+  int get hashCode => Object.hash(runtimeType, clockState,
+      const DeepCollectionEquality().hash(_timelines), bottomSheetState);
 
   @JsonKey(ignore: true)
   @override
@@ -160,12 +195,15 @@ class _$ClockUiStateImpl implements _ClockUiState {
 abstract class _ClockUiState implements ClockUiState {
   factory _ClockUiState(
       {required final ClockState clockState,
-      required final List<TimelineState> timelines}) = _$ClockUiStateImpl;
+      required final List<TimelineState> timelines,
+      required final BottomSheetState bottomSheetState}) = _$ClockUiStateImpl;
 
   @override
   ClockState get clockState;
   @override
   List<TimelineState> get timelines;
+  @override
+  BottomSheetState get bottomSheetState;
   @override
   @JsonKey(ignore: true)
   _$$ClockUiStateImplCopyWith<_$ClockUiStateImpl> get copyWith =>
@@ -316,6 +354,151 @@ abstract class _ClockState implements ClockState {
   @override
   @JsonKey(ignore: true)
   _$$ClockStateImplCopyWith<_$ClockStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$BottomSheetState {
+  String get selectedStation => throw _privateConstructorUsedError;
+  List<String> get stations => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $BottomSheetStateCopyWith<BottomSheetState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BottomSheetStateCopyWith<$Res> {
+  factory $BottomSheetStateCopyWith(
+          BottomSheetState value, $Res Function(BottomSheetState) then) =
+      _$BottomSheetStateCopyWithImpl<$Res, BottomSheetState>;
+  @useResult
+  $Res call({String selectedStation, List<String> stations});
+}
+
+/// @nodoc
+class _$BottomSheetStateCopyWithImpl<$Res, $Val extends BottomSheetState>
+    implements $BottomSheetStateCopyWith<$Res> {
+  _$BottomSheetStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? selectedStation = null,
+    Object? stations = null,
+  }) {
+    return _then(_value.copyWith(
+      selectedStation: null == selectedStation
+          ? _value.selectedStation
+          : selectedStation // ignore: cast_nullable_to_non_nullable
+              as String,
+      stations: null == stations
+          ? _value.stations
+          : stations // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BottomSheetStateImplCopyWith<$Res>
+    implements $BottomSheetStateCopyWith<$Res> {
+  factory _$$BottomSheetStateImplCopyWith(_$BottomSheetStateImpl value,
+          $Res Function(_$BottomSheetStateImpl) then) =
+      __$$BottomSheetStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String selectedStation, List<String> stations});
+}
+
+/// @nodoc
+class __$$BottomSheetStateImplCopyWithImpl<$Res>
+    extends _$BottomSheetStateCopyWithImpl<$Res, _$BottomSheetStateImpl>
+    implements _$$BottomSheetStateImplCopyWith<$Res> {
+  __$$BottomSheetStateImplCopyWithImpl(_$BottomSheetStateImpl _value,
+      $Res Function(_$BottomSheetStateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? selectedStation = null,
+    Object? stations = null,
+  }) {
+    return _then(_$BottomSheetStateImpl(
+      selectedStation: null == selectedStation
+          ? _value.selectedStation
+          : selectedStation // ignore: cast_nullable_to_non_nullable
+              as String,
+      stations: null == stations
+          ? _value._stations
+          : stations // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BottomSheetStateImpl implements _BottomSheetState {
+  _$BottomSheetStateImpl(
+      {required this.selectedStation, required final List<String> stations})
+      : _stations = stations;
+
+  @override
+  final String selectedStation;
+  final List<String> _stations;
+  @override
+  List<String> get stations {
+    if (_stations is EqualUnmodifiableListView) return _stations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_stations);
+  }
+
+  @override
+  String toString() {
+    return 'BottomSheetState(selectedStation: $selectedStation, stations: $stations)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BottomSheetStateImpl &&
+            (identical(other.selectedStation, selectedStation) ||
+                other.selectedStation == selectedStation) &&
+            const DeepCollectionEquality().equals(other._stations, _stations));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, selectedStation,
+      const DeepCollectionEquality().hash(_stations));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BottomSheetStateImplCopyWith<_$BottomSheetStateImpl> get copyWith =>
+      __$$BottomSheetStateImplCopyWithImpl<_$BottomSheetStateImpl>(
+          this, _$identity);
+}
+
+abstract class _BottomSheetState implements BottomSheetState {
+  factory _BottomSheetState(
+      {required final String selectedStation,
+      required final List<String> stations}) = _$BottomSheetStateImpl;
+
+  @override
+  String get selectedStation;
+  @override
+  List<String> get stations;
+  @override
+  @JsonKey(ignore: true)
+  _$$BottomSheetStateImplCopyWith<_$BottomSheetStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -1,6 +1,8 @@
 import 'package:buss_timetable/timetable/timetable_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'clock_bottom_sheet.dart';
+
 class ClockFooterSection extends StatelessWidget {
   const ClockFooterSection({super.key});
 
@@ -21,16 +23,15 @@ class ClockFooterSection extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const TimetableRoute()),
-            );
+            navigateToTimetableRoute(context);
           },
           style: mediumButtonStyle,
           child: const Icon(Icons.view_timeline_outlined, size: 28),
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            showClockBottomSheet(context);
+          },
           style: largeButtonStyle,
           child: const Icon(Icons.change_circle, size: 34),
         ),

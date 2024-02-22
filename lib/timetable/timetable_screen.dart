@@ -1,6 +1,13 @@
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:flutter/material.dart';
 
+void navigateToTimetableRoute(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const TimetableRoute()),
+  );
+}
+
 class TimetableRoute extends StatelessWidget {
   const TimetableRoute({super.key});
 
