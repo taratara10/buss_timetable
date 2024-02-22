@@ -48,8 +48,12 @@ class ClockViewModel extends _$ClockViewModel {
     _timer.cancel();
   }
 
-  void onTap(StationItem item) {
+  void onTap(String stationName) {
     // todo
-    print('--ss aaaa $item');
+    state = state.copyWith(
+      bottomSheetState:
+          state.bottomSheetState.copyWith(selectedStation: stationName),
+    );
+    print('--ss aaaa $stationName');
   }
 }

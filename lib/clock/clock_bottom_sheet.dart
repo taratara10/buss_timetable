@@ -67,10 +67,15 @@ class _StationList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.read(clockViewModelProvider.notifier);
-    final List<StationItem> items = ref.watch(clockViewModelProvider).stations;
+    final BottomSheetState state =
+        ref.watch(clockViewModelProvider).bottomSheetState;
+
+    void onChanged(String? value) {
+      viewModel.onTap(value!);
+    }
 
     return ListView(
-      children: items.map((item) {
+      children: state.stations.map((item) {
         return GestureDetector(
           onTap: () {
             viewModel.onTap(item);
@@ -79,16 +84,14 @@ class _StationList extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Row(
               children: [
-                Icon(
-                  Icons.directions_bus,
-                  size: 32,
-                  color: (item.isSelected)
-                      ? Theme.of(context).primaryColor
-                      : Theme.of(context).disabledColor,
+                Radio(
+                  value: item,
+                  groupValue: state.selectedStation,
+                  onChanged: onChanged,
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  item.name,
+                  item,
                   style: const TextStyle(fontSize: 22),
                 ),
               ],
