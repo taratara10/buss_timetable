@@ -1,4 +1,5 @@
 import 'package:buss_timetable/model/timetable.dart';
+import 'package:buss_timetable/timetable/timetable_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,6 +16,7 @@ class TimetableRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const _AppBarTitle()),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
@@ -37,12 +39,12 @@ class TimetableRoute extends StatelessWidget {
   }
 }
 
-class _TopAppBar extends ConsumerWidget {
-  _TopAppBar();
+class _AppBarTitle extends ConsumerWidget {
+  const _AppBarTitle();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // TODO: implement build
-    throw UnimplementedError();
+    final String title = ref.watch(timetableViewModelProvider).stationName;
+    return Text(title);
   }
 }
