@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../model/timetable.dart';
 
 class TimetableSection extends StatelessWidget {
-  Timetable data;
+  final Timetable data;
 
-  TimetableSection(this.data, {super.key});
+  const TimetableSection(this.data, {super.key});
 
   @override
   Widget build(BuildContext context) {

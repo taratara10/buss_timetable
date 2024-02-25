@@ -18,6 +18,17 @@ enum DayType {
   holiday,
 }
 
+extension DayTypeExtension on DayType {
+  String get stringValue {
+    switch (this) {
+      case DayType.weekday:
+        return '平日';
+      case DayType.holiday:
+        return '休日';
+    }
+  }
+}
+
 Timetable weekDayTimetable = Timetable(
   rows: [
     TimetableRow(hour: 6, minute: [00, 15, 35, 55]),
