@@ -12,10 +12,15 @@ class TimetableViewModel extends _$TimetableViewModel {
   TimetableUiState build() {
     return TimetableUiState(
       stationName: "田喜野井",
+      pageIndex: 0,
       timetables: [
         weekDayTimetable,
         holidayTimetable,
       ],
     );
+  }
+
+  void updatePageIndex(int index) {
+    state = state.copyWith(pageIndex: index);
   }
 }

@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TimetableUiState {
   String get stationName => throw _privateConstructorUsedError;
+  int get pageIndex => throw _privateConstructorUsedError;
   List<Timetable> get timetables => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,7 @@ abstract class $TimetableUiStateCopyWith<$Res> {
           TimetableUiState value, $Res Function(TimetableUiState) then) =
       _$TimetableUiStateCopyWithImpl<$Res, TimetableUiState>;
   @useResult
-  $Res call({String stationName, List<Timetable> timetables});
+  $Res call({String stationName, int pageIndex, List<Timetable> timetables});
 }
 
 /// @nodoc
@@ -47,6 +48,7 @@ class _$TimetableUiStateCopyWithImpl<$Res, $Val extends TimetableUiState>
   @override
   $Res call({
     Object? stationName = null,
+    Object? pageIndex = null,
     Object? timetables = null,
   }) {
     return _then(_value.copyWith(
@@ -54,6 +56,10 @@ class _$TimetableUiStateCopyWithImpl<$Res, $Val extends TimetableUiState>
           ? _value.stationName
           : stationName // ignore: cast_nullable_to_non_nullable
               as String,
+      pageIndex: null == pageIndex
+          ? _value.pageIndex
+          : pageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       timetables: null == timetables
           ? _value.timetables
           : timetables // ignore: cast_nullable_to_non_nullable
@@ -70,7 +76,7 @@ abstract class _$$TimetableUiStateImplCopyWith<$Res>
       __$$TimetableUiStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String stationName, List<Timetable> timetables});
+  $Res call({String stationName, int pageIndex, List<Timetable> timetables});
 }
 
 /// @nodoc
@@ -85,6 +91,7 @@ class __$$TimetableUiStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? stationName = null,
+    Object? pageIndex = null,
     Object? timetables = null,
   }) {
     return _then(_$TimetableUiStateImpl(
@@ -92,6 +99,10 @@ class __$$TimetableUiStateImplCopyWithImpl<$Res>
           ? _value.stationName
           : stationName // ignore: cast_nullable_to_non_nullable
               as String,
+      pageIndex: null == pageIndex
+          ? _value.pageIndex
+          : pageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       timetables: null == timetables
           ? _value._timetables
           : timetables // ignore: cast_nullable_to_non_nullable
@@ -104,11 +115,15 @@ class __$$TimetableUiStateImplCopyWithImpl<$Res>
 
 class _$TimetableUiStateImpl implements _TimetableUiState {
   _$TimetableUiStateImpl(
-      {required this.stationName, required final List<Timetable> timetables})
+      {required this.stationName,
+      required this.pageIndex,
+      required final List<Timetable> timetables})
       : _timetables = timetables;
 
   @override
   final String stationName;
+  @override
+  final int pageIndex;
   final List<Timetable> _timetables;
   @override
   List<Timetable> get timetables {
@@ -119,7 +134,7 @@ class _$TimetableUiStateImpl implements _TimetableUiState {
 
   @override
   String toString() {
-    return 'TimetableUiState(stationName: $stationName, timetables: $timetables)';
+    return 'TimetableUiState(stationName: $stationName, pageIndex: $pageIndex, timetables: $timetables)';
   }
 
   @override
@@ -129,12 +144,14 @@ class _$TimetableUiStateImpl implements _TimetableUiState {
             other is _$TimetableUiStateImpl &&
             (identical(other.stationName, stationName) ||
                 other.stationName == stationName) &&
+            (identical(other.pageIndex, pageIndex) ||
+                other.pageIndex == pageIndex) &&
             const DeepCollectionEquality()
                 .equals(other._timetables, _timetables));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, stationName,
+  int get hashCode => Object.hash(runtimeType, stationName, pageIndex,
       const DeepCollectionEquality().hash(_timetables));
 
   @JsonKey(ignore: true)
@@ -148,10 +165,13 @@ class _$TimetableUiStateImpl implements _TimetableUiState {
 abstract class _TimetableUiState implements TimetableUiState {
   factory _TimetableUiState(
       {required final String stationName,
+      required final int pageIndex,
       required final List<Timetable> timetables}) = _$TimetableUiStateImpl;
 
   @override
   String get stationName;
+  @override
+  int get pageIndex;
   @override
   List<Timetable> get timetables;
   @override

@@ -20,18 +20,23 @@ class TimetableRoute extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final TimetableUiState state = ref.watch(timetableViewModelProvider);
+    final String title = ref.watch(timetableViewModelProvider).stationName;
     return Scaffold(
-      appBar: AppBar(title: const _AppBarTitle()),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-          child: Stack(
-            children: [
-              // todo
-              TimetableSection(state.timetables.first),
-              _TimetableIndicator(index: 0, data: state.timetables),
-            ],
-          ),
+      appBar: AppBar(title: Text(title)),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        child: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 42),
+              child: _TimetablePager(),
+            ),
+            _TimetableIndicator(
+              index: state.pageIndex,
+              data: state.timetables,
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -45,28 +50,21 @@ class TimetableRoute extends ConsumerWidget {
   }
 }
 
-class _AppBarTitle extends ConsumerWidget {
-  const _AppBarTitle();
+class _TimetablePager extends ConsumerWidget {
+  const _TimetablePager();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String title = ref.watch(timetableViewModelProvider).stationName;
-    return Text(title);
-  }
-}
-
-class Page extends StatelessWidget {
-  final List<Timetable> data;
-
-  const Page(this.data, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
+    final List<Timetable> timetables =
+        ref.watch(timetableViewModelProvider).timetables;
+    final viewModel = ref.read(timetableViewModelProvider.notifier);
     return PageView.builder(
-      itemCount: data.length,
-      onPageChanged: (int page) {},
+      itemCount: timetables.length,
+      onPageChanged: (int page) {
+        viewModel.updatePageIndex(page);
+      },
       itemBuilder: (context, index) {
-        return TimetableSection(data[index]);
+        return TimetableSection(timetables[index]);
       },
     );
   }
@@ -80,24 +78,16 @@ class _TimetableIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional.topStart,
-      children: <Widget>[
-        Container(
-          margin: const EdgeInsets.only(top: 32),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: data
-                .mapIndexed(
-                  (i, item) => _IndicatorCell(
-                    isSelected: i == index,
-                    name: item.dayType.stringValue,
-                  ),
-                )
-                .toList(),
-          ),
-        ),
-      ],
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: data
+          .mapIndexed(
+            (i, item) => _IndicatorCell(
+              isSelected: i == index,
+              name: item.dayType.stringValue,
+            ),
+          )
+          .toList(),
     );
   }
 }
@@ -110,13 +100,21 @@ class _IndicatorCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(name),
-        (isSelected)
-            ? Container(height: 1, color: Colors.grey)
-            : const SizedBox(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Column(
+        children: [
+          Text(name),
+          const SizedBox(height: 4),
+          (isSelected)
+              ? Container(
+                  height: 3,
+                  width: 42,
+                  color: Theme.of(context).colorScheme.primary,
+                )
+              : const SizedBox(),
+        ],
+      ),
     );
   }
 }

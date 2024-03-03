@@ -7,6 +7,7 @@ part 'timetable_ui_state.freezed.dart';
 class TimetableUiState with _$TimetableUiState {
   factory TimetableUiState({
     required String stationName,
+    required int pageIndex,
     required List<Timetable> timetables,
   }) = _TimetableUiState;
 }
