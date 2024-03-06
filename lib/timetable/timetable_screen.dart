@@ -14,28 +14,23 @@ void navigateToTimetableRoute(BuildContext context) {
   );
 }
 
-class TimetableRoute extends ConsumerWidget {
+class TimetableRoute extends StatelessWidget {
   const TimetableRoute({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final TimetableUiState state = ref.watch(timetableViewModelProvider);
-    final String title = ref.watch(timetableViewModelProvider).stationName;
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      appBar: AppBar(title: _AppBarTitle()),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         child: Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 42),
               child: _TimetablePager(),
             ),
-            _TimetableIndicator(
-              index: state.pageIndex,
-              data: state.timetables,
-            ),
+            _TimetableIndicator(),
           ],
         ),
       ),
@@ -50,41 +45,55 @@ class TimetableRoute extends ConsumerWidget {
   }
 }
 
+class _AppBarTitle extends ConsumerWidget {
+  const _AppBarTitle();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final String title = ref.watch(timetableViewModelProvider).stationName;
+    return Text(title);
+  }
+}
+
 class _TimetablePager extends ConsumerWidget {
   const _TimetablePager();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<Timetable> timetables =
-        ref.watch(timetableViewModelProvider).timetables;
+    final TimetableUiState state = ref.watch(timetableViewModelProvider);
     final viewModel = ref.read(timetableViewModelProvider.notifier);
+    // todo indexの変化でcontrollerのcallbackを呼び出す
+    final controller = PageController(initialPage: state.pageIndex);
     return PageView.builder(
-      itemCount: timetables.length,
+      controller: controller,
+      itemCount: state.timetables.length,
       onPageChanged: (int page) {
         viewModel.updatePageIndex(page);
       },
       itemBuilder: (context, index) {
-        return TimetableSection(timetables[index]);
+        return TimetableSection(state.timetables[index]);
       },
     );
   }
 }
 
-class _TimetableIndicator extends StatelessWidget {
-  final int index;
-  final List<Timetable> data;
-
-  const _TimetableIndicator({required this.index, required this.data});
+class _TimetableIndicator extends ConsumerWidget {
+  const _TimetableIndicator();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final TimetableUiState state = ref.watch(timetableViewModelProvider);
+    final viewModel = ref.read(timetableViewModelProvider.notifier);
     return Row(
       mainAxisSize: MainAxisSize.min,
-      children: data
+      children: state.timetables
           .mapIndexed(
             (i, item) => _IndicatorCell(
-              isSelected: i == index,
+              isSelected: i == state.pageIndex,
               name: item.dayType.stringValue,
+              onClick: () {
+                viewModel.updatePageIndex(i);
+              },
             ),
           )
           .toList(),
@@ -95,25 +104,32 @@ class _TimetableIndicator extends StatelessWidget {
 class _IndicatorCell extends StatelessWidget {
   final bool isSelected;
   final String name;
+  final Function onClick;
 
-  const _IndicatorCell({required this.isSelected, required this.name});
+  const _IndicatorCell(
+      {required this.isSelected, required this.name, required this.onClick});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: Column(
-        children: [
-          Text(name),
-          const SizedBox(height: 4),
-          (isSelected)
-              ? Container(
-                  height: 3,
-                  width: 42,
-                  color: Theme.of(context).colorScheme.primary,
-                )
-              : const SizedBox(),
-        ],
+      child: GestureDetector(
+        onTap: () {
+          onClick();
+        },
+        child: Column(
+          children: [
+            Text(name),
+            const SizedBox(height: 4),
+            (isSelected)
+                ? Container(
+                    height: 3,
+                    width: 42,
+                    color: Theme.of(context).colorScheme.primary,
+                  )
+                : const SizedBox(),
+          ],
+        ),
       ),
     );
   }
