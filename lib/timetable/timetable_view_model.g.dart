@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'clock_view_model.dart';
+part of 'timetable_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$clockViewModelHash() => r'e5d05c42d1516f19db2953c805a496536c45ef99';
+String _$timetableViewModelHash() =>
+    r'29712193e953fd80f71b49e7b86c672b6162ab3c';
 
-/// See also [ClockViewModel].
-@ProviderFor(ClockViewModel)
-final clockViewModelProvider =
-    AutoDisposeNotifierProvider<ClockViewModel, ClockUiState>.internal(
-  ClockViewModel.new,
-  name: r'clockViewModelProvider',
+/// See also [TimetableViewModel].
+@ProviderFor(TimetableViewModel)
+final timetableViewModelProvider =
+    AutoDisposeNotifierProvider<TimetableViewModel, TimetableUiState>.internal(
+  TimetableViewModel.new,
+  name: r'timetableViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$clockViewModelHash,
+      : _$timetableViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$ClockViewModel = AutoDisposeNotifier<ClockUiState>;
+typedef _$TimetableViewModel = AutoDisposeNotifier<TimetableUiState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

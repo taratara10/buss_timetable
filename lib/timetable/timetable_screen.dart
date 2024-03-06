@@ -1,5 +1,11 @@
-import 'package:buss_timetable/model/timetable.dart';
+import 'package:buss_timetable/timetable/timetable_section.dart';
+import 'package:buss_timetable/timetable/timetable_ui_state.dart';
+import 'package:buss_timetable/timetable/timetable_view_model.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../model/timetable.dart';
 
 void navigateToTimetableRoute(BuildContext context) {
   Navigator.push(
@@ -14,15 +20,18 @@ class TimetableRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-          child: Column(children: [
-            const SizedBox(height: 50),
-            const Text('時刻表'),
-            const SizedBox(height: 16),
-            _TimetableSection(weekDayTimetable),
-          ]),
+      appBar: AppBar(title: _AppBarTitle()),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        child: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 42),
+              child: _TimetablePager(),
+            ),
+            _TimetableIndicator(),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -36,47 +45,92 @@ class TimetableRoute extends StatelessWidget {
   }
 }
 
-class _TimetableSection extends StatelessWidget {
-  Timetable data;
-
-  _TimetableSection(this.data);
+class _AppBarTitle extends ConsumerWidget {
+  const _AppBarTitle();
 
   @override
-  Widget build(BuildContext context) {
-    return Table(
-      border: TableBorder.all(width: 1.0, color: Colors.black), // 枠線の設定
-      columnWidths: const {
-        0: FlexColumnWidth(1), // 列の幅の設定
-        1: FlexColumnWidth(5),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final String title = ref.watch(timetableViewModelProvider).stationName;
+    return Text(title);
+  }
+}
+
+class _TimetablePager extends ConsumerWidget {
+  const _TimetablePager();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final TimetableUiState state = ref.watch(timetableViewModelProvider);
+    final viewModel = ref.read(timetableViewModelProvider.notifier);
+    // todo indexの変化でcontrollerのcallbackを呼び出す
+    final controller = PageController(initialPage: state.pageIndex);
+    return PageView.builder(
+      controller: controller,
+      itemCount: state.timetables.length,
+      onPageChanged: (int page) {
+        viewModel.updatePageIndex(page);
       },
-      children: _generateRow(data),
+      itemBuilder: (context, index) {
+        return TimetableSection(state.timetables[index]);
+      },
     );
   }
 }
 
-List<TableRow> _generateRow(Timetable timetable) {
-  return timetable.rows
-      .map(
-        (row) => TableRow(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              color: Colors.blueGrey.shade50,
-              child: Text(row.hour.toString()),
+class _TimetableIndicator extends ConsumerWidget {
+  const _TimetableIndicator();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final TimetableUiState state = ref.watch(timetableViewModelProvider);
+    final viewModel = ref.read(timetableViewModelProvider.notifier);
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: state.timetables
+          .mapIndexed(
+            (i, item) => _IndicatorCell(
+              isSelected: i == state.pageIndex,
+              name: item.dayType.stringValue,
+              onClick: () {
+                viewModel.updatePageIndex(i);
+              },
             ),
-            Row(
-              children: row.minute
-                  .map(
-                    (item) => Padding(
-                      padding: const EdgeInsets.only(left: 10, top: 4),
-                      child: Text(item.toString().padLeft(2, '0')),
-                    ),
+          )
+          .toList(),
+    );
+  }
+}
+
+class _IndicatorCell extends StatelessWidget {
+  final bool isSelected;
+  final String name;
+  final Function onClick;
+
+  const _IndicatorCell(
+      {required this.isSelected, required this.name, required this.onClick});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: GestureDetector(
+        onTap: () {
+          onClick();
+        },
+        child: Column(
+          children: [
+            Text(name),
+            const SizedBox(height: 4),
+            (isSelected)
+                ? Container(
+                    height: 3,
+                    width: 42,
+                    color: Theme.of(context).colorScheme.primary,
                   )
-                  .toList(),
-            )
+                : const SizedBox(),
           ],
         ),
-      )
-      .toList();
+      ),
+    );
+  }
 }
