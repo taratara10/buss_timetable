@@ -10,11 +10,16 @@ class TimetableViewModel extends _$TimetableViewModel {
 
   @override
   TimetableUiState build() {
+    // todo 動的に取得する
     return TimetableUiState(
       stationName: "田喜野井",
       pageIndex: 0,
       timetables: [
         weekDayTimetable,
+        Timetable(
+          rows: holidayTimetable.rows,
+          dayType: DayType.saturday,
+        ),
         holidayTimetable,
       ],
     );

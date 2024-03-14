@@ -97,7 +97,7 @@ class _TimetableIndicator extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 48),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisSize: MainAxisSize.max,
+        // mainAxisSize: MainAxisSize.min,
         children: state.timetables
             .mapIndexed(
               (i, item) => _IndicatorCell(
@@ -132,13 +132,13 @@ class _IndicatorCell extends StatelessWidget {
         children: [
           Text(name),
           const SizedBox(height: 4),
-          (isSelected)
-              ? Container(
-                  height: 3,
-                  width: 42,
-                  color: Theme.of(context).colorScheme.primary,
-                )
-              : const SizedBox(height: 3),
+          Container(
+            height: 3,
+            width: 64,
+            color: (isSelected)
+                ? Theme.of(context).colorScheme.primary
+                : Colors.transparent,
+          )
         ],
       ),
     );
