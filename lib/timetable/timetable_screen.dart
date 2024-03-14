@@ -62,8 +62,18 @@ class _TimetablePager extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final TimetableUiState state = ref.watch(timetableViewModelProvider);
     final viewModel = ref.read(timetableViewModelProvider.notifier);
-    // todo indexの変化でcontrollerのcallbackを呼び出す
     final controller = PageController(initialPage: state.pageIndex);
+
+    /// TimetableUiStateの値が変化したら、呼び出される
+    /// _TimetableIndicatorで変更されたindexにpageを遷移させる
+    ref.listen(timetableViewModelProvider, (previous, next) {
+      controller.animateToPage(
+        next.pageIndex,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.fastEaseInToSlowEaseOut,
+      );
+    });
+
     return PageView.builder(
       controller: controller,
       itemCount: state.timetables.length,
