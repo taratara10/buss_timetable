@@ -93,19 +93,23 @@ class _TimetableIndicator extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final TimetableUiState state = ref.watch(timetableViewModelProvider);
     final viewModel = ref.read(timetableViewModelProvider.notifier);
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: state.timetables
-          .mapIndexed(
-            (i, item) => _IndicatorCell(
-              isSelected: i == state.pageIndex,
-              name: item.dayType.stringValue,
-              onClick: () {
-                viewModel.updatePageIndex(i);
-              },
-            ),
-          )
-          .toList(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 48),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.max,
+        children: state.timetables
+            .mapIndexed(
+              (i, item) => _IndicatorCell(
+                isSelected: i == state.pageIndex,
+                name: item.dayType.stringValue,
+                onClick: () {
+                  viewModel.updatePageIndex(i);
+                },
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 }
@@ -120,25 +124,22 @@ class _IndicatorCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: GestureDetector(
-        onTap: () {
-          onClick();
-        },
-        child: Column(
-          children: [
-            Text(name),
-            const SizedBox(height: 4),
-            (isSelected)
-                ? Container(
-                    height: 3,
-                    width: 42,
-                    color: Theme.of(context).colorScheme.primary,
-                  )
-                : const SizedBox(),
-          ],
-        ),
+    return GestureDetector(
+      onTap: () {
+        onClick();
+      },
+      child: Column(
+        children: [
+          Text(name),
+          const SizedBox(height: 4),
+          (isSelected)
+              ? Container(
+                  height: 3,
+                  width: 42,
+                  color: Theme.of(context).colorScheme.primary,
+                )
+              : const SizedBox(height: 3),
+        ],
       ),
     );
   }
