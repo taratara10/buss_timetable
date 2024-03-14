@@ -20,19 +20,16 @@ class TimetableRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: _AppBarTitle()),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        child: Stack(
-          alignment: AlignmentDirectional.bottomCenter,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 42),
-              child: _TimetablePager(),
-            ),
-            _TimetableIndicator(),
-          ],
-        ),
+      appBar: AppBar(title: const _AppBarTitle()),
+      body: const Stack(
+        alignment: AlignmentDirectional.bottomCenter,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 42),
+            child: _TimetablePager(),
+          ),
+          _TimetableIndicator(),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -81,7 +78,9 @@ class _TimetablePager extends ConsumerWidget {
         viewModel.updatePageIndex(page);
       },
       itemBuilder: (context, index) {
-        return TimetableSection(state.timetables[index]);
+        return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: TimetableSection(state.timetables[index]));
       },
     );
   }
