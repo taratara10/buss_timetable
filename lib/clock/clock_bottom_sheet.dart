@@ -71,23 +71,23 @@ class _StationList extends ConsumerWidget {
         ref.watch(clockViewModelProvider).bottomSheetState;
 
     return ListView(
-      children: state.stations.map((item) {
+      children: state.stations.map((station) {
         return GestureDetector(
           onTap: () {
-            viewModel.onTap(item);
+            viewModel.onTap(station);
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Row(
               children: [
                 Radio(
-                  value: item,
+                  value: station,
                   groupValue: state.selectedStation,
                   onChanged: (_) {},
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  item,
+                  station.value,
                   style: const TextStyle(fontSize: 22),
                 ),
               ],

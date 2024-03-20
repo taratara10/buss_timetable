@@ -1,9 +1,16 @@
+import 'package:buss_timetable/model/station_name.dart';
+
 /// 時刻表
 class Timetable {
+  final StationName stationName;
   final List<TimetableRow> rows;
   final DayType dayType;
 
-  Timetable({required this.rows, required this.dayType});
+  Timetable({
+    required this.stationName,
+    required this.rows,
+    required this.dayType,
+  });
 }
 
 class TimetableRow {
@@ -33,6 +40,7 @@ extension DayTypeExtension on DayType {
 }
 
 Timetable weekDayTimetable = Timetable(
+  stationName: StationName("田喜野井"),
   rows: [
     TimetableRow(hour: 6, minute: [00, 15, 35, 55]),
     TimetableRow(hour: 7, minute: [10, 27, 47]),
@@ -55,6 +63,7 @@ Timetable weekDayTimetable = Timetable(
 );
 
 Timetable holidayTimetable = Timetable(
+  stationName: StationName("田喜野井"),
   rows: [
     TimetableRow(hour: 6, minute: [02, 32]),
     TimetableRow(hour: 7, minute: [02, 32, 55]),

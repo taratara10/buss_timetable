@@ -7,7 +7,7 @@ part of 'timetable_view_model.dart';
 // **************************************************************************
 
 String _$timetableViewModelHash() =>
-    r'29712193e953fd80f71b49e7b86c672b6162ab3c';
+    r'ad86fcb11bbcf2dc29a03986d62477cc794485a4';
 
 /// See also [TimetableViewModel].
 @ProviderFor(TimetableViewModel)

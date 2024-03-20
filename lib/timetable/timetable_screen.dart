@@ -1,11 +1,11 @@
+import 'package:buss_timetable/model/station_name.dart';
+import 'package:buss_timetable/model/timetable.dart';
 import 'package:buss_timetable/timetable/timetable_section.dart';
 import 'package:buss_timetable/timetable/timetable_ui_state.dart';
 import 'package:buss_timetable/timetable/timetable_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../model/timetable.dart';
 
 void navigateToTimetableRoute(BuildContext context) {
   Navigator.push(
@@ -47,8 +47,8 @@ class _AppBarTitle extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String title = ref.watch(timetableViewModelProvider).stationName;
-    return Text(title);
+    final StationName title = ref.watch(timetableViewModelProvider).stationName;
+    return Text(title.value);
   }
 }
 
@@ -97,7 +97,6 @@ class _TimetableIndicator extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 48),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        // mainAxisSize: MainAxisSize.min,
         children: state.timetables
             .mapIndexed(
               (i, item) => _IndicatorCell(

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:clock/clock.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -48,12 +49,15 @@ class ClockViewModel extends _$ClockViewModel {
     _timer.cancel();
   }
 
-  void onTap(String stationName) {
+  void onTap(StationName name) {
+    // save selecting station in preference
+    // get station timetable
+    // update uiState
+
     // todo
     state = state.copyWith(
-      bottomSheetState:
-          state.bottomSheetState.copyWith(selectedStation: stationName),
+      bottomSheetState: state.bottomSheetState.copyWith(selectedStation: name),
     );
-    print('--ss aaaa $stationName');
+    print('--ss aaaa $name');
   }
 }
