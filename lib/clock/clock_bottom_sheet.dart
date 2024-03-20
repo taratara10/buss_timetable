@@ -70,10 +70,6 @@ class _StationList extends ConsumerWidget {
     final BottomSheetState state =
         ref.watch(clockViewModelProvider).bottomSheetState;
 
-    void onChanged(String? value) {
-      viewModel.onTap(value!);
-    }
-
     return ListView(
       children: state.stations.map((item) {
         return GestureDetector(
@@ -87,7 +83,7 @@ class _StationList extends ConsumerWidget {
                 Radio(
                   value: item,
                   groupValue: state.selectedStation,
-                  onChanged: onChanged,
+                  onChanged: (_) {},
                 ),
                 const SizedBox(width: 8),
                 Text(
