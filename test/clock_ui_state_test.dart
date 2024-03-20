@@ -1,4 +1,5 @@
 import 'package:buss_timetable/clock/clock_ui_state.dart';
+import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:clock/clock.dart';
 import 'package:fake_async/fake_async.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   Timetable sampleTimetable = Timetable(
+    stationName: StationName(''),
     rows: [
       TimetableRow(hour: 9, minute: [5, 30]),
       TimetableRow(hour: 10, minute: [20, 30]),
