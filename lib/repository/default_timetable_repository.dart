@@ -11,7 +11,7 @@ class DefaultTimetableRepository implements TimetableRepository {
     switch (stationName.value) {
       case "田喜野井":
         return Success(_takinoi);
-      case "津田沼":
+      case "津田沼_津08":
         return Success(_takinoi);
       default:
         return Failure(Exception("Not found"));
@@ -92,7 +92,7 @@ List<Timetable> _takinoi = [
 
 List<Timetable> _tsudanuma = [
   Timetable(
-    stationName: StationName("津田沼"),
+    stationName: StationName("津田沼_津08"),
     rows: [
       TimetableRow(hour: 6, minute: [25, 42, 58]),
       TimetableRow(hour: 7, minute: [27, 42]),
@@ -115,7 +115,7 @@ List<Timetable> _tsudanuma = [
     dayType: DayType.weekday,
   ),
   Timetable(
-    stationName: StationName("津田沼"),
+    stationName: StationName("津田沼_津08"),
     rows: [
       TimetableRow(hour: 6, minute: [23, 57]),
       TimetableRow(hour: 7, minute: [28, 58]),
@@ -138,7 +138,7 @@ List<Timetable> _tsudanuma = [
     dayType: DayType.saturday,
   ),
   Timetable(
-    stationName: StationName("津田沼"),
+    stationName: StationName("津田沼_津08"),
     rows: [
       TimetableRow(hour: 6, minute: [23, 57]),
       TimetableRow(hour: 7, minute: [28, 58]),
