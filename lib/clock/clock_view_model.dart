@@ -1,18 +1,26 @@
 import 'dart:async';
 
+import 'package:buss_timetable/domain/timetable_repository.dart';
 import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
+import 'package:buss_timetable/repository/default_timetable_repository.dart';
 import 'package:clock/clock.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'clock_ui_state.dart';
 
-part 'clock_view_model.g.dart';
+final clockViewModelNotifierProvider =
+    StateNotifierProvider.autoDispose<ClockViewModel, ClockUiState>((ref) {
+  return ClockViewModel(ref.watch(timetableRepositoryProvider));
+});
 
-@riverpod
-class ClockViewModel extends _$ClockViewModel {
+class ClockViewModel extends StateNotifier<ClockUiState> {
+  final TimetableRepository _timetableRepository;
+
   late Timer _timer;
   late Timetable _timeTable;
+
+  ClockViewModel(this._timetableRepository) : super(ClockUiState.empty());
 
   @override
   ClockUiState build() {
@@ -23,6 +31,8 @@ class ClockViewModel extends _$ClockViewModel {
   }
 
   void startTimer() {
+    // var result = repository.getTimetable(stationName: StationName("田喜野井"));
+    // print('--vv ${result}');
     _timer = Timer.periodic(
       // 第一引数 実行間隔
       const Duration(milliseconds: 500),

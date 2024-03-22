@@ -1,9 +1,16 @@
 import 'package:buss_timetable/domain/timetable_repository.dart';
 import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:result_dart/src/result.dart';
 
+final timetableRepositoryProvider = Provider<TimetableRepository>(
+  (_) => DefaultTimetableRepository(),
+);
+
 class DefaultTimetableRepository implements TimetableRepository {
+  DefaultTimetableRepository();
+
   @override
   Result<List<Timetable>, Exception> getTimetable({
     required StationName stationName,

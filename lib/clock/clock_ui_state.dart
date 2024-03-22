@@ -14,6 +14,17 @@ class ClockUiState with _$ClockUiState {
     required List<TimelineState> timelines,
     required BottomSheetState bottomSheetState,
   }) = _ClockUiState;
+
+  factory ClockUiState.empty() {
+    return ClockUiState(
+      clockState: ClockState(departureTime: "", remainingClock: ""),
+      timelines: [],
+      bottomSheetState: BottomSheetState(
+        selectedStation: StationName(""),
+        stations: [],
+      ),
+    );
+  }
 }
 
 @freezed

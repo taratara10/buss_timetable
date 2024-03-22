@@ -66,9 +66,9 @@ class _StationList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.read(clockViewModelProvider.notifier);
+    final viewModel = ref.read(clockViewModelNotifierProvider.notifier);
     final BottomSheetState state =
-        ref.watch(clockViewModelProvider).bottomSheetState;
+        ref.watch(clockViewModelNotifierProvider).bottomSheetState;
 
     return ListView(
       children: state.stations.map((station) {
