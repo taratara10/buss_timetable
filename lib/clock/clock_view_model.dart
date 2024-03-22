@@ -20,19 +20,14 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
   late Timer _timer;
   late Timetable _timeTable;
 
-  ClockViewModel(this._timetableRepository) : super(ClockUiState.empty());
-
-  @override
-  ClockUiState build() {
+  ClockViewModel(this._timetableRepository) : super(ClockUiState.empty()) {
     _timeTable = weekDayTimetable;
     // buildのタイミングがわからないので、これは安全？
     startTimer();
-    return weekDayTimetable.toClockUiState(now: clock.now());
+    state = weekDayTimetable.toClockUiState(now: clock.now());
   }
 
   void startTimer() {
-    // var result = repository.getTimetable(stationName: StationName("田喜野井"));
-    // print('--vv ${result}');
     _timer = Timer.periodic(
       // 第一引数 実行間隔
       const Duration(milliseconds: 500),
