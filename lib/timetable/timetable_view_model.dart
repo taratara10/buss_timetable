@@ -1,3 +1,4 @@
+import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:buss_timetable/timetable/timetable_ui_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -12,11 +13,12 @@ class TimetableViewModel extends _$TimetableViewModel {
   TimetableUiState build() {
     // todo 動的に取得する
     return TimetableUiState(
-      stationName: "田喜野井",
+      stationName: StationName("田喜野井"),
       pageIndex: 0,
       timetables: [
         weekDayTimetable,
         Timetable(
+          stationName: StationName("田喜野井"),
           rows: holidayTimetable.rows,
           dayType: DayType.saturday,
         ),

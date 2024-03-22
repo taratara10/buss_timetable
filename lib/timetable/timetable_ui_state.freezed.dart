@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TimetableUiState {
-  String get stationName => throw _privateConstructorUsedError;
+  StationName get stationName => throw _privateConstructorUsedError;
   int get pageIndex => throw _privateConstructorUsedError;
   List<Timetable> get timetables => throw _privateConstructorUsedError;
 
@@ -31,7 +31,8 @@ abstract class $TimetableUiStateCopyWith<$Res> {
           TimetableUiState value, $Res Function(TimetableUiState) then) =
       _$TimetableUiStateCopyWithImpl<$Res, TimetableUiState>;
   @useResult
-  $Res call({String stationName, int pageIndex, List<Timetable> timetables});
+  $Res call(
+      {StationName stationName, int pageIndex, List<Timetable> timetables});
 }
 
 /// @nodoc
@@ -55,7 +56,7 @@ class _$TimetableUiStateCopyWithImpl<$Res, $Val extends TimetableUiState>
       stationName: null == stationName
           ? _value.stationName
           : stationName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StationName,
       pageIndex: null == pageIndex
           ? _value.pageIndex
           : pageIndex // ignore: cast_nullable_to_non_nullable
@@ -76,7 +77,8 @@ abstract class _$$TimetableUiStateImplCopyWith<$Res>
       __$$TimetableUiStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String stationName, int pageIndex, List<Timetable> timetables});
+  $Res call(
+      {StationName stationName, int pageIndex, List<Timetable> timetables});
 }
 
 /// @nodoc
@@ -98,7 +100,7 @@ class __$$TimetableUiStateImplCopyWithImpl<$Res>
       stationName: null == stationName
           ? _value.stationName
           : stationName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StationName,
       pageIndex: null == pageIndex
           ? _value.pageIndex
           : pageIndex // ignore: cast_nullable_to_non_nullable
@@ -121,7 +123,7 @@ class _$TimetableUiStateImpl implements _TimetableUiState {
       : _timetables = timetables;
 
   @override
-  final String stationName;
+  final StationName stationName;
   @override
   final int pageIndex;
   final List<Timetable> _timetables;
@@ -164,12 +166,12 @@ class _$TimetableUiStateImpl implements _TimetableUiState {
 
 abstract class _TimetableUiState implements TimetableUiState {
   factory _TimetableUiState(
-      {required final String stationName,
+      {required final StationName stationName,
       required final int pageIndex,
       required final List<Timetable> timetables}) = _$TimetableUiStateImpl;
 
   @override
-  String get stationName;
+  StationName get stationName;
   @override
   int get pageIndex;
   @override

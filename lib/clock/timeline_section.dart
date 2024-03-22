@@ -9,7 +9,7 @@ class TimelineSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ClockUiState state = ref.watch(clockViewModelProvider);
+    final ClockUiState state = ref.watch(clockViewModelNotifierProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

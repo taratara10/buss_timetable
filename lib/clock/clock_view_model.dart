@@ -1,24 +1,30 @@
 import 'dart:async';
 
+import 'package:buss_timetable/domain/timetable_repository.dart';
+import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
+import 'package:buss_timetable/repository/default_timetable_repository.dart';
 import 'package:clock/clock.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'clock_ui_state.dart';
 
-part 'clock_view_model.g.dart';
+final clockViewModelNotifierProvider =
+    StateNotifierProvider.autoDispose<ClockViewModel, ClockUiState>((ref) {
+  return ClockViewModel(ref.watch(timetableRepositoryProvider));
+});
 
-@riverpod
-class ClockViewModel extends _$ClockViewModel {
+class ClockViewModel extends StateNotifier<ClockUiState> {
+  final TimetableRepository _timetableRepository;
+
   late Timer _timer;
   late Timetable _timeTable;
 
-  @override
-  ClockUiState build() {
+  ClockViewModel(this._timetableRepository) : super(ClockUiState.empty()) {
     _timeTable = weekDayTimetable;
     // buildのタイミングがわからないので、これは安全？
     startTimer();
-    return weekDayTimetable.toClockUiState(now: clock.now());
+    state = weekDayTimetable.toClockUiState(now: clock.now());
   }
 
   void startTimer() {
@@ -48,12 +54,15 @@ class ClockViewModel extends _$ClockViewModel {
     _timer.cancel();
   }
 
-  void onTap(String stationName) {
+  void onTap(StationName name) {
+    // save selecting station in preference
+    // get station timetable
+    // update uiState
+
     // todo
     state = state.copyWith(
-      bottomSheetState:
-          state.bottomSheetState.copyWith(selectedStation: stationName),
+      bottomSheetState: state.bottomSheetState.copyWith(selectedStation: name),
     );
-    print('--ss aaaa $stationName');
+    print('--ss aaaa $name');
   }
 }

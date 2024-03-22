@@ -1,4 +1,5 @@
 import 'package:buss_timetable/extension/int_extenstion.dart';
+import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,6 +14,17 @@ class ClockUiState with _$ClockUiState {
     required List<TimelineState> timelines,
     required BottomSheetState bottomSheetState,
   }) = _ClockUiState;
+
+  factory ClockUiState.empty() {
+    return ClockUiState(
+      clockState: ClockState(departureTime: "", remainingClock: ""),
+      timelines: [],
+      bottomSheetState: BottomSheetState(
+        selectedStation: StationName(""),
+        stations: [],
+      ),
+    );
+  }
 }
 
 @freezed
@@ -36,8 +48,8 @@ class ClockState with _$ClockState {
 @freezed
 class BottomSheetState with _$BottomSheetState {
   factory BottomSheetState({
-    required String selectedStation,
-    required List<String> stations,
+    required StationName selectedStation,
+    required List<StationName> stations,
   }) = _BottomSheetState;
 }
 
@@ -65,10 +77,10 @@ extension TimetableExtension on Timetable {
         numberOfResult: 4,
       ),
       bottomSheetState: BottomSheetState(
-        selectedStation: '津田沼',
+        selectedStation: StationName('津田沼'),
         stations: [
-          '津田沼',
-          '田喜野井',
+          StationName('津田沼'),
+          StationName('田喜野井'),
         ],
       ),
     ).updateClockState(now: now);

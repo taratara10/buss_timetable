@@ -40,8 +40,9 @@ class ClockCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.read(clockViewModelProvider.notifier);
-    final ClockUiState state = ref.watch(clockViewModelProvider);
+    final viewModel = ref.read(clockViewModelNotifierProvider.notifier);
+    final ClockUiState state = ref.watch(clockViewModelNotifierProvider);
+    // todo
     final autoDisposeProvider = Provider.autoDispose((ref) {
       ref.onDispose(() {
         viewModel.cancelTimer();

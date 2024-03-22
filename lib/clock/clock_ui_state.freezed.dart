@@ -359,8 +359,8 @@ abstract class _ClockState implements ClockState {
 
 /// @nodoc
 mixin _$BottomSheetState {
-  String get selectedStation => throw _privateConstructorUsedError;
-  List<String> get stations => throw _privateConstructorUsedError;
+  StationName get selectedStation => throw _privateConstructorUsedError;
+  List<StationName> get stations => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BottomSheetStateCopyWith<BottomSheetState> get copyWith =>
@@ -373,7 +373,7 @@ abstract class $BottomSheetStateCopyWith<$Res> {
           BottomSheetState value, $Res Function(BottomSheetState) then) =
       _$BottomSheetStateCopyWithImpl<$Res, BottomSheetState>;
   @useResult
-  $Res call({String selectedStation, List<String> stations});
+  $Res call({StationName selectedStation, List<StationName> stations});
 }
 
 /// @nodoc
@@ -396,11 +396,11 @@ class _$BottomSheetStateCopyWithImpl<$Res, $Val extends BottomSheetState>
       selectedStation: null == selectedStation
           ? _value.selectedStation
           : selectedStation // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StationName,
       stations: null == stations
           ? _value.stations
           : stations // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<StationName>,
     ) as $Val);
   }
 }
@@ -413,7 +413,7 @@ abstract class _$$BottomSheetStateImplCopyWith<$Res>
       __$$BottomSheetStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String selectedStation, List<String> stations});
+  $Res call({StationName selectedStation, List<StationName> stations});
 }
 
 /// @nodoc
@@ -434,11 +434,11 @@ class __$$BottomSheetStateImplCopyWithImpl<$Res>
       selectedStation: null == selectedStation
           ? _value.selectedStation
           : selectedStation // ignore: cast_nullable_to_non_nullable
-              as String,
+              as StationName,
       stations: null == stations
           ? _value._stations
           : stations // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<StationName>,
     ));
   }
 }
@@ -447,14 +447,15 @@ class __$$BottomSheetStateImplCopyWithImpl<$Res>
 
 class _$BottomSheetStateImpl implements _BottomSheetState {
   _$BottomSheetStateImpl(
-      {required this.selectedStation, required final List<String> stations})
+      {required this.selectedStation,
+      required final List<StationName> stations})
       : _stations = stations;
 
   @override
-  final String selectedStation;
-  final List<String> _stations;
+  final StationName selectedStation;
+  final List<StationName> _stations;
   @override
-  List<String> get stations {
+  List<StationName> get stations {
     if (_stations is EqualUnmodifiableListView) return _stations;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_stations);
@@ -489,13 +490,13 @@ class _$BottomSheetStateImpl implements _BottomSheetState {
 
 abstract class _BottomSheetState implements BottomSheetState {
   factory _BottomSheetState(
-      {required final String selectedStation,
-      required final List<String> stations}) = _$BottomSheetStateImpl;
+      {required final StationName selectedStation,
+      required final List<StationName> stations}) = _$BottomSheetStateImpl;
 
   @override
-  String get selectedStation;
+  StationName get selectedStation;
   @override
-  List<String> get stations;
+  List<StationName> get stations;
   @override
   @JsonKey(ignore: true)
   _$$BottomSheetStateImplCopyWith<_$BottomSheetStateImpl> get copyWith =>
