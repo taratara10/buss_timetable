@@ -38,7 +38,7 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
       state = ClockUiState(
         dayType: clock.dayType,
         timetable: currentDayTypeTimetable,
-        clockCardState: ClockCardState.empty().updateClockState(
+        clockCardState: ClockCardState.of(
           nextTimeline: timelines.firstOrNull,
           now: clock.now(),
         ),
@@ -78,7 +78,7 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
 
         // それ以外はclockのみ再計算
         state = state.copyWith(
-          clockCardState: state.clockCardState.updateClockState(
+          clockCardState: ClockCardState.of(
             nextTimeline: state.timelines.firstOrNull,
             now: now,
           ),

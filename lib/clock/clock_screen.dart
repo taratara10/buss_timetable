@@ -17,7 +17,7 @@ class ClockRoute extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 50),
-              ClockCard(),
+              ClockCardSection(),
               SizedBox(height: 32),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),

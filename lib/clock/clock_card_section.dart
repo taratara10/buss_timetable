@@ -1,7 +1,10 @@
 import 'package:buss_timetable/clock/clock_view_model.dart';
+import 'package:buss_timetable/extension/int_extenstion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'clock_ui_state.dart';
 
 part '../_generated/clock/clock_card_section.freezed.dart';
 
@@ -21,10 +24,48 @@ class ClockCardState with _$ClockCardState {
       remainingClock: '',
     );
   }
+
+  factory ClockCardState.of({
+    required TimelineState? nextTimeline,
+    required DateTime now,
+  }) {
+    if (nextTimeline != null) {
+      return ClockCardState(
+        departureTime: '${nextTimeline.departureTime}まで',
+        remainingClock: _getRemainingTime(
+          now: now,
+          target: nextTimeline.departure,
+        ),
+      );
+    } else {
+      return ClockCardState.empty();
+    }
+  }
 }
 
-class ClockCard extends ConsumerWidget {
-  const ClockCard({super.key});
+/// 現在からtargetまでの時刻を'mm:ss'のフォーマットを返す
+String _getRemainingTime({
+  required DateTime now,
+  required DateTime target,
+}) {
+  Duration diff = target.difference(now);
+  int minutes = diff.inMinutes;
+  int seconds = diff.inSeconds;
+  if (seconds > 0) {
+    // 分を2桁の0埋めでフォーマット
+    String formattedMinutes = minutes.toTwoDigit();
+    // 秒を2桁の0埋めでフォーマット
+    String formattedSeconds = (seconds % 60).toTwoDigit();
+    // フォーマットされた時間を結合して返す
+    return '$formattedMinutes:$formattedSeconds';
+  } else {
+    // todo
+    return 'このバスは出発済みです';
+  }
+}
+
+class ClockCardSection extends ConsumerWidget {
+  const ClockCardSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
