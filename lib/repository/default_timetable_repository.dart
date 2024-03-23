@@ -1,4 +1,5 @@
 import 'package:buss_timetable/domain/timetable_repository.dart';
+import 'package:buss_timetable/model/day_type.dart';
 import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,6 +24,17 @@ class DefaultTimetableRepository implements TimetableRepository {
       default:
         return Failure(Exception("Not found"));
     }
+  }
+
+  @override
+  StationName getSelectedStationName() {
+    // TODO: implement getSelectedStationName
+    return StationName("田喜野井");
+  }
+
+  @override
+  void updateSelectedStationName({required StationName stationName}) {
+    // TODO: implement updateSelectedStationName
   }
 }
 

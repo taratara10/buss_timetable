@@ -16,6 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ClockUiState {
+  DayType get dayType => throw _privateConstructorUsedError;
+
+  /// 現在選択中のstationとdayTypeに一致する時刻表
+  Timetable? get timetable => throw _privateConstructorUsedError;
   ClockState get clockState => throw _privateConstructorUsedError;
   List<TimelineState> get timelines => throw _privateConstructorUsedError;
   BottomSheetState get bottomSheetState => throw _privateConstructorUsedError;
@@ -32,7 +36,9 @@ abstract class $ClockUiStateCopyWith<$Res> {
       _$ClockUiStateCopyWithImpl<$Res, ClockUiState>;
   @useResult
   $Res call(
-      {ClockState clockState,
+      {DayType dayType,
+      Timetable? timetable,
+      ClockState clockState,
       List<TimelineState> timelines,
       BottomSheetState bottomSheetState});
 
@@ -53,11 +59,21 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? dayType = null,
+    Object? timetable = freezed,
     Object? clockState = null,
     Object? timelines = null,
     Object? bottomSheetState = null,
   }) {
     return _then(_value.copyWith(
+      dayType: null == dayType
+          ? _value.dayType
+          : dayType // ignore: cast_nullable_to_non_nullable
+              as DayType,
+      timetable: freezed == timetable
+          ? _value.timetable
+          : timetable // ignore: cast_nullable_to_non_nullable
+              as Timetable?,
       clockState: null == clockState
           ? _value.clockState
           : clockState // ignore: cast_nullable_to_non_nullable
@@ -99,7 +115,9 @@ abstract class _$$ClockUiStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {ClockState clockState,
+      {DayType dayType,
+      Timetable? timetable,
+      ClockState clockState,
       List<TimelineState> timelines,
       BottomSheetState bottomSheetState});
 
@@ -120,11 +138,21 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? dayType = null,
+    Object? timetable = freezed,
     Object? clockState = null,
     Object? timelines = null,
     Object? bottomSheetState = null,
   }) {
     return _then(_$ClockUiStateImpl(
+      dayType: null == dayType
+          ? _value.dayType
+          : dayType // ignore: cast_nullable_to_non_nullable
+              as DayType,
+      timetable: freezed == timetable
+          ? _value.timetable
+          : timetable // ignore: cast_nullable_to_non_nullable
+              as Timetable?,
       clockState: null == clockState
           ? _value.clockState
           : clockState // ignore: cast_nullable_to_non_nullable
@@ -145,11 +173,19 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
 
 class _$ClockUiStateImpl implements _ClockUiState {
   _$ClockUiStateImpl(
-      {required this.clockState,
+      {required this.dayType,
+      required this.timetable,
+      required this.clockState,
       required final List<TimelineState> timelines,
       required this.bottomSheetState})
       : _timelines = timelines;
 
+  @override
+  final DayType dayType;
+
+  /// 現在選択中のstationとdayTypeに一致する時刻表
+  @override
+  final Timetable? timetable;
   @override
   final ClockState clockState;
   final List<TimelineState> _timelines;
@@ -165,7 +201,7 @@ class _$ClockUiStateImpl implements _ClockUiState {
 
   @override
   String toString() {
-    return 'ClockUiState(clockState: $clockState, timelines: $timelines, bottomSheetState: $bottomSheetState)';
+    return 'ClockUiState(dayType: $dayType, timetable: $timetable, clockState: $clockState, timelines: $timelines, bottomSheetState: $bottomSheetState)';
   }
 
   @override
@@ -173,6 +209,9 @@ class _$ClockUiStateImpl implements _ClockUiState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ClockUiStateImpl &&
+            (identical(other.dayType, dayType) || other.dayType == dayType) &&
+            (identical(other.timetable, timetable) ||
+                other.timetable == timetable) &&
             (identical(other.clockState, clockState) ||
                 other.clockState == clockState) &&
             const DeepCollectionEquality()
@@ -182,7 +221,7 @@ class _$ClockUiStateImpl implements _ClockUiState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, clockState,
+  int get hashCode => Object.hash(runtimeType, dayType, timetable, clockState,
       const DeepCollectionEquality().hash(_timelines), bottomSheetState);
 
   @JsonKey(ignore: true)
@@ -194,10 +233,18 @@ class _$ClockUiStateImpl implements _ClockUiState {
 
 abstract class _ClockUiState implements ClockUiState {
   factory _ClockUiState(
-      {required final ClockState clockState,
+      {required final DayType dayType,
+      required final Timetable? timetable,
+      required final ClockState clockState,
       required final List<TimelineState> timelines,
       required final BottomSheetState bottomSheetState}) = _$ClockUiStateImpl;
 
+  @override
+  DayType get dayType;
+  @override
+
+  /// 現在選択中のstationとdayTypeに一致する時刻表
+  Timetable? get timetable;
   @override
   ClockState get clockState;
   @override

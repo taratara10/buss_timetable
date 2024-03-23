@@ -1,5 +1,7 @@
 import 'package:buss_timetable/model/station_name.dart';
 
+import 'day_type.dart';
+
 /// 時刻表
 class Timetable {
   final StationName stationName;
@@ -18,25 +20,6 @@ class TimetableRow {
   final List<int> minute;
 
   TimetableRow({required this.hour, required this.minute});
-}
-
-enum DayType {
-  weekday,
-  saturday,
-  holiday,
-}
-
-extension DayTypeExtension on DayType {
-  String get stringValue {
-    switch (this) {
-      case DayType.weekday:
-        return '平日';
-      case DayType.saturday:
-        return '土曜';
-      case DayType.holiday:
-        return '日曜/祝日';
-    }
-  }
 }
 
 Timetable weekDayTimetable = Timetable(

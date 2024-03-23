@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:buss_timetable/domain/timetable_repository.dart';
+import 'package:buss_timetable/model/day_type.dart';
 import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:buss_timetable/repository/default_timetable_repository.dart';
@@ -16,15 +17,40 @@ final clockViewModelNotifierProvider =
 
 class ClockViewModel extends StateNotifier<ClockUiState> {
   final TimetableRepository _timetableRepository;
-
   late Timer _timer;
-  late Timetable _timeTable;
 
   ClockViewModel(this._timetableRepository) : super(ClockUiState.empty()) {
-    _timeTable = weekDayTimetable;
-    // buildのタイミングがわからないので、これは安全？
+    init();
     startTimer();
-    state = weekDayTimetable.toClockUiState(now: clock.now());
+  }
+
+  void init() {
+    StationName current = _timetableRepository.getSelectedStationName();
+    _timetableRepository.getTimetable(stationName: current).onSuccess((result) {
+      Timetable currentDayTypeTimetable =
+          result.firstWhere((item) => item.dayType == clock.dayType);
+      List<TimelineState> timelines = currentDayTypeTimetable.toTimelineState(
+        now: clock.now(),
+        numberOfResult: 4,
+      );
+      state = ClockUiState(
+        dayType: clock.dayType,
+        timetable: currentDayTypeTimetable,
+        clockState: ClockState.empty().updateClockState(
+          nextTimeline: timelines.firstOrNull,
+          now: clock.now(),
+        ),
+        timelines: timelines,
+        // todo 仮
+        bottomSheetState: BottomSheetState(
+          selectedStation: StationName('津田沼'),
+          stations: [
+            StationName('津田沼'),
+            StationName('田喜野井'),
+          ],
+        ),
+      );
+    }).onFailure((failure) {});
   }
 
   void startTimer() {
@@ -37,13 +63,24 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
         // DateTime _now = DateTime.now();
         // DateTime now = DateTime(_now.year, _now.month, _now.day, 12, 30);
         DateTime now = clock.now();
-        if ((now.second % 60) == 0) {
+        Timetable? timetable = state.timetable;
+        if ((now.second % 60) == 0 && timetable != null) {
           // minの変わり目は、全体を再計算
-          state = _timeTable.toClockUiState(now: now);
-        } else {
-          // それ以外はclockのみ再計算
-          state = state.updateClockState(now: now);
+          state = state.copyWith(
+            timelines: timetable.toTimelineState(
+              numberOfResult: 4,
+              now: now,
+            ),
+          );
         }
+
+        // それ以外はclockのみ再計算
+        state = state.copyWith(
+          clockState: state.clockState.updateClockState(
+            nextTimeline: state.timelines.firstOrNull,
+            now: now,
+          ),
+        );
         // todo debug 画面遷移時にcancelされるか確認する
         print('--ss timer ${timer.tick}/ ${timer.isActive}');
       },

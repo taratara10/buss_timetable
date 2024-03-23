@@ -1,4 +1,5 @@
 import 'package:buss_timetable/clock/clock_ui_state.dart';
+import 'package:buss_timetable/model/day_type.dart';
 import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:clock/clock.dart';
@@ -9,13 +10,14 @@ void main() {
   Timetable sampleTimetable = Timetable(
     stationName: StationName(''),
     rows: [
+      TimetableRow(hour: 8, minute: [5, 30]),
       TimetableRow(hour: 9, minute: [5, 30]),
       TimetableRow(hour: 10, minute: [20, 30]),
     ],
     dayType: DayType.weekday,
   );
 
-  test('foo', () {
+  test('時刻が9:00以降発のバスを3つ取得する', () {
     fakeAsync(initialTime: DateTime(2024, 3, 3, 9, 0), (_) {
       var result = sampleTimetable.toTimelineState(
         now: clock.now(),
