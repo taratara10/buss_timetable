@@ -1,4 +1,5 @@
 import 'package:buss_timetable/extension/int_extenstion.dart';
+import 'package:buss_timetable/model/day_type.dart';
 import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,6 +11,10 @@ part 'clock_ui_state.freezed.dart';
 @freezed
 class ClockUiState with _$ClockUiState {
   factory ClockUiState({
+    required DayType dayType,
+
+    /// 現在選択中のstationとdayTypeに一致する時刻表
+    required Timetable? timetable,
     required ClockState clockState,
     required List<TimelineState> timelines,
     required BottomSheetState bottomSheetState,
@@ -17,7 +22,12 @@ class ClockUiState with _$ClockUiState {
 
   factory ClockUiState.empty() {
     return ClockUiState(
-      clockState: ClockState(departureTime: "", remainingClock: ""),
+      dayType: DayType.weekday,
+      timetable: null,
+      clockState: ClockState(
+        departureTime: "",
+        remainingClock: "",
+      ),
       timelines: [],
       bottomSheetState: BottomSheetState(
         selectedStation: StationName(""),
@@ -68,28 +78,11 @@ class TimelineState with _$TimelineState {
 }
 
 extension TimetableExtension on Timetable {
-  ClockUiState toClockUiState({required DateTime now}) {
-    // 直近4本の時刻を取得
-    return ClockUiState(
-      clockState: ClockState.empty(),
-      timelines: toTimelineState(
-        now: now,
-        numberOfResult: 4,
-      ),
-      bottomSheetState: BottomSheetState(
-        selectedStation: StationName('津田沼'),
-        stations: [
-          StationName('津田沼'),
-          StationName('田喜野井'),
-        ],
-      ),
-    ).updateClockState(now: now);
-  }
-
   /// @see clock_ui_state_test.dart
   List<TimelineState> toTimelineState({
-    required DateTime now,
+    /// 直近何件の時刻表を表示するか
     required int numberOfResult,
+    required DateTime now,
   }) {
     List<TimelineState> result = [];
 
@@ -158,16 +151,17 @@ extension TimetableExtension on Timetable {
   }
 }
 
-extension ClockUiStateExtension on ClockUiState {
-  ClockUiState updateClockState({
+extension ClockStateExtension on ClockState {
+  ClockState updateClockState({
+    required TimelineState? nextTimeline,
     required DateTime now,
   }) {
-    TimelineState? next = timelines.firstOrNull;
-    if (next != null) {
-      return copyWith(
-        clockState: ClockState(
-          departureTime: '${next.departureTime}まで',
-          remainingClock: _getRemainingTime(now: now, target: next.departure),
+    if (nextTimeline != null) {
+      return ClockState(
+        departureTime: '${nextTimeline.departureTime}まで',
+        remainingClock: _getRemainingTime(
+          now: now,
+          target: nextTimeline.departure,
         ),
       );
     } else {
