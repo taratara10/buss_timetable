@@ -22,7 +22,8 @@ mixin _$ClockUiState {
   Timetable? get timetable => throw _privateConstructorUsedError;
   ClockState get clockState => throw _privateConstructorUsedError;
   List<TimelineState> get timelines => throw _privateConstructorUsedError;
-  BottomSheetState get bottomSheetState => throw _privateConstructorUsedError;
+  ClockBottomSheetState get bottomSheetState =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ClockUiStateCopyWith<ClockUiState> get copyWith =>
@@ -40,9 +41,10 @@ abstract class $ClockUiStateCopyWith<$Res> {
       Timetable? timetable,
       ClockState clockState,
       List<TimelineState> timelines,
-      BottomSheetState bottomSheetState});
+      ClockBottomSheetState bottomSheetState});
 
   $ClockStateCopyWith<$Res> get clockState;
+  $ClockBottomSheetStateCopyWith<$Res> get bottomSheetState;
 }
 
 /// @nodoc
@@ -62,7 +64,7 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
     Object? timetable = freezed,
     Object? clockState = null,
     Object? timelines = null,
-    Object? bottomSheetState = freezed,
+    Object? bottomSheetState = null,
   }) {
     return _then(_value.copyWith(
       dayType: null == dayType
@@ -81,10 +83,10 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
           ? _value.timelines
           : timelines // ignore: cast_nullable_to_non_nullable
               as List<TimelineState>,
-      bottomSheetState: freezed == bottomSheetState
+      bottomSheetState: null == bottomSheetState
           ? _value.bottomSheetState
           : bottomSheetState // ignore: cast_nullable_to_non_nullable
-              as BottomSheetState,
+              as ClockBottomSheetState,
     ) as $Val);
   }
 
@@ -93,6 +95,15 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
   $ClockStateCopyWith<$Res> get clockState {
     return $ClockStateCopyWith<$Res>(_value.clockState, (value) {
       return _then(_value.copyWith(clockState: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ClockBottomSheetStateCopyWith<$Res> get bottomSheetState {
+    return $ClockBottomSheetStateCopyWith<$Res>(_value.bottomSheetState,
+        (value) {
+      return _then(_value.copyWith(bottomSheetState: value) as $Val);
     });
   }
 }
@@ -110,10 +121,12 @@ abstract class _$$ClockUiStateImplCopyWith<$Res>
       Timetable? timetable,
       ClockState clockState,
       List<TimelineState> timelines,
-      BottomSheetState bottomSheetState});
+      ClockBottomSheetState bottomSheetState});
 
   @override
   $ClockStateCopyWith<$Res> get clockState;
+  @override
+  $ClockBottomSheetStateCopyWith<$Res> get bottomSheetState;
 }
 
 /// @nodoc
@@ -131,7 +144,7 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
     Object? timetable = freezed,
     Object? clockState = null,
     Object? timelines = null,
-    Object? bottomSheetState = freezed,
+    Object? bottomSheetState = null,
   }) {
     return _then(_$ClockUiStateImpl(
       dayType: null == dayType
@@ -150,10 +163,10 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
           ? _value._timelines
           : timelines // ignore: cast_nullable_to_non_nullable
               as List<TimelineState>,
-      bottomSheetState: freezed == bottomSheetState
+      bottomSheetState: null == bottomSheetState
           ? _value.bottomSheetState
           : bottomSheetState // ignore: cast_nullable_to_non_nullable
-              as BottomSheetState,
+              as ClockBottomSheetState,
     ));
   }
 }
@@ -186,7 +199,7 @@ class _$ClockUiStateImpl implements _ClockUiState {
   }
 
   @override
-  final BottomSheetState bottomSheetState;
+  final ClockBottomSheetState bottomSheetState;
 
   @override
   String toString() {
@@ -205,18 +218,13 @@ class _$ClockUiStateImpl implements _ClockUiState {
                 other.clockState == clockState) &&
             const DeepCollectionEquality()
                 .equals(other._timelines, _timelines) &&
-            const DeepCollectionEquality()
-                .equals(other.bottomSheetState, bottomSheetState));
+            (identical(other.bottomSheetState, bottomSheetState) ||
+                other.bottomSheetState == bottomSheetState));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      dayType,
-      timetable,
-      clockState,
-      const DeepCollectionEquality().hash(_timelines),
-      const DeepCollectionEquality().hash(bottomSheetState));
+  int get hashCode => Object.hash(runtimeType, dayType, timetable, clockState,
+      const DeepCollectionEquality().hash(_timelines), bottomSheetState);
 
   @JsonKey(ignore: true)
   @override
@@ -227,11 +235,12 @@ class _$ClockUiStateImpl implements _ClockUiState {
 
 abstract class _ClockUiState implements ClockUiState {
   factory _ClockUiState(
-      {required final DayType dayType,
-      required final Timetable? timetable,
-      required final ClockState clockState,
-      required final List<TimelineState> timelines,
-      required final BottomSheetState bottomSheetState}) = _$ClockUiStateImpl;
+          {required final DayType dayType,
+          required final Timetable? timetable,
+          required final ClockState clockState,
+          required final List<TimelineState> timelines,
+          required final ClockBottomSheetState bottomSheetState}) =
+      _$ClockUiStateImpl;
 
   @override
   DayType get dayType;
@@ -244,7 +253,7 @@ abstract class _ClockUiState implements ClockUiState {
   @override
   List<TimelineState> get timelines;
   @override
-  BottomSheetState get bottomSheetState;
+  ClockBottomSheetState get bottomSheetState;
   @override
   @JsonKey(ignore: true)
   _$$ClockUiStateImplCopyWith<_$ClockUiStateImpl> get copyWith =>

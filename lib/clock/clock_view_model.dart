@@ -8,7 +8,7 @@ import 'package:buss_timetable/repository/default_timetable_repository.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'bottom_sheet_state.dart';
+import 'clock_bottom_sheet.dart';
 import 'clock_ui_state.dart';
 
 final clockViewModelNotifierProvider =
@@ -43,7 +43,7 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
         ),
         timelines: timelines,
         // todo 仮
-        bottomSheetState: BottomSheetState(
+        bottomSheetState: ClockBottomSheetState(
           selectedStation: StationName('津田沼'),
           stations: [
             StationName('津田沼'),

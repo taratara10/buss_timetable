@@ -4,12 +4,10 @@ import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'bottom_sheet_state.dart';
+import 'clock_bottom_sheet.dart';
 
 part '../_generated/clock/clock_ui_state.freezed.dart';
 
-/// 下記のコマンドで生成
-/// `dart run build_runner build`
 @freezed
 class ClockUiState with _$ClockUiState {
   factory ClockUiState({
@@ -19,7 +17,7 @@ class ClockUiState with _$ClockUiState {
     required Timetable? timetable,
     required ClockState clockState,
     required List<TimelineState> timelines,
-    required BottomSheetState bottomSheetState,
+    required ClockBottomSheetState bottomSheetState,
   }) = _ClockUiState;
 
   factory ClockUiState.empty() {
@@ -31,7 +29,7 @@ class ClockUiState with _$ClockUiState {
         remainingClock: "",
       ),
       timelines: [],
-      bottomSheetState: BottomSheetState(
+      bottomSheetState: ClockBottomSheetState(
         selectedStation: StationName(""),
         stations: [],
       ),
