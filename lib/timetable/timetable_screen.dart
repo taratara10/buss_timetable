@@ -1,5 +1,5 @@
+import 'package:buss_timetable/model/day_type.dart';
 import 'package:buss_timetable/model/station_name.dart';
-import 'package:buss_timetable/model/timetable.dart';
 import 'package:buss_timetable/timetable/timetable_section.dart';
 import 'package:buss_timetable/timetable/timetable_ui_state.dart';
 import 'package:buss_timetable/timetable/timetable_view_model.dart';

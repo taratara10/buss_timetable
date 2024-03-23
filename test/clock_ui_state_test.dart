@@ -1,4 +1,5 @@
 import 'package:buss_timetable/clock/clock_ui_state.dart';
+import 'package:buss_timetable/model/day_type.dart';
 import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:clock/clock.dart';
