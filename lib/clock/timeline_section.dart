@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'clock_view_model.dart';
+
 part '../_generated/clock/timeline_section.freezed.dart';
 
 @freezed
@@ -23,7 +24,7 @@ class TimelineState with _$TimelineState {
 }
 
 extension TimetableExtension on Timetable {
-  /// @see clock_ui_state_test.dart
+  /// @see timeline_state_test.dart
   List<TimelineState> toTimelineState({
     /// 直近何件の時刻表を表示するか
     required int numberOfResult,
