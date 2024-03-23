@@ -5,6 +5,7 @@ import 'package:buss_timetable/model/timetable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'clock_bottom_sheet.dart';
+import 'clock_card_section.dart';
 
 part '../_generated/clock/clock_ui_state.freezed.dart';
 
@@ -15,7 +16,7 @@ class ClockUiState with _$ClockUiState {
 
     /// 現在選択中のstationとdayTypeに一致する時刻表
     required Timetable? timetable,
-    required ClockState clockState,
+    required ClockCardState clockCardState,
     required List<TimelineState> timelines,
     required ClockBottomSheetState bottomSheetState,
   }) = _ClockUiState;
@@ -24,7 +25,7 @@ class ClockUiState with _$ClockUiState {
     return ClockUiState(
       dayType: DayType.weekday,
       timetable: null,
-      clockState: ClockState(
+      clockCardState: ClockCardState(
         departureTime: "",
         remainingClock: "",
       ),
@@ -33,24 +34,6 @@ class ClockUiState with _$ClockUiState {
         selectedStation: StationName(""),
         stations: [],
       ),
-    );
-  }
-}
-
-@freezed
-class ClockState with _$ClockState {
-  factory ClockState({
-    /// hh:mm発まで
-    required String departureTime,
-
-    /// format: mm:ss
-    required String remainingClock,
-  }) = _ClockState;
-
-  factory ClockState.empty() {
-    return ClockState(
-      departureTime: '',
-      remainingClock: '',
     );
   }
 }
@@ -143,13 +126,13 @@ extension TimetableExtension on Timetable {
   }
 }
 
-extension ClockStateExtension on ClockState {
-  ClockState updateClockState({
+extension ClockStateExtension on ClockCardState {
+  ClockCardState updateClockState({
     required TimelineState? nextTimeline,
     required DateTime now,
   }) {
     if (nextTimeline != null) {
-      return ClockState(
+      return ClockCardState(
         departureTime: '${nextTimeline.departureTime}まで',
         remainingClock: _getRemainingTime(
           now: now,

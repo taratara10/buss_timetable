@@ -9,6 +9,7 @@ import 'package:clock/clock.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'clock_bottom_sheet.dart';
+import 'clock_card_section.dart';
 import 'clock_ui_state.dart';
 
 final clockViewModelNotifierProvider =
@@ -37,7 +38,7 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
       state = ClockUiState(
         dayType: clock.dayType,
         timetable: currentDayTypeTimetable,
-        clockState: ClockState.empty().updateClockState(
+        clockCardState: ClockCardState.empty().updateClockState(
           nextTimeline: timelines.firstOrNull,
           now: clock.now(),
         ),
@@ -77,7 +78,7 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
 
         // それ以外はclockのみ再計算
         state = state.copyWith(
-          clockState: state.clockState.updateClockState(
+          clockCardState: state.clockCardState.updateClockState(
             nextTimeline: state.timelines.firstOrNull,
             now: now,
           ),
