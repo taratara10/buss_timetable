@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:buss_timetable/clock/timeline_section.dart';
 import 'package:buss_timetable/domain/timetable_repository.dart';
 import 'package:buss_timetable/model/day_type.dart';
 import 'package:buss_timetable/model/station_name.dart';

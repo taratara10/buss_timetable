@@ -1,10 +1,9 @@
 import 'package:buss_timetable/clock/clock_view_model.dart';
+import 'package:buss_timetable/clock/timeline_section.dart';
 import 'package:buss_timetable/extension/int_extenstion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'clock_ui_state.dart';
 
 part '../_generated/clock/clock_card_section.freezed.dart';
 
