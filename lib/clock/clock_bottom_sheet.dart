@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'clock_ui_state.dart';
+import 'bottom_sheet_state.dart';
 import 'clock_view_model.dart';
 
 void showClockBottomSheet(BuildContext context) {

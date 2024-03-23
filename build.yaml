@@ -1,3 +1,5 @@
+# dart run build_runner build
+# 上記のコマンドで自動生成されるファイルの出力先を変更する
 targets:
   $default:
     builders:

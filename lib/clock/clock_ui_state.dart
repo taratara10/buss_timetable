@@ -4,6 +4,8 @@ import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'bottom_sheet_state.dart';
+
 part '../_generated/clock/clock_ui_state.freezed.dart';
 
 /// 下記のコマンドで生成
@@ -53,14 +55,6 @@ class ClockState with _$ClockState {
       remainingClock: '',
     );
   }
-}
-
-@freezed
-class BottomSheetState with _$BottomSheetState {
-  factory BottomSheetState({
-    required StationName selectedStation,
-    required List<StationName> stations,
-  }) = _BottomSheetState;
 }
 
 @freezed

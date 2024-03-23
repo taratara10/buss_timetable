@@ -8,6 +8,7 @@ import 'package:buss_timetable/repository/default_timetable_repository.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'bottom_sheet_state.dart';
 import 'clock_ui_state.dart';
 
 final clockViewModelNotifierProvider =

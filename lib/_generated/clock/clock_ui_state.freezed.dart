@@ -43,7 +43,6 @@ abstract class $ClockUiStateCopyWith<$Res> {
       BottomSheetState bottomSheetState});
 
   $ClockStateCopyWith<$Res> get clockState;
-  $BottomSheetStateCopyWith<$Res> get bottomSheetState;
 }
 
 /// @nodoc
@@ -63,7 +62,7 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
     Object? timetable = freezed,
     Object? clockState = null,
     Object? timelines = null,
-    Object? bottomSheetState = null,
+    Object? bottomSheetState = freezed,
   }) {
     return _then(_value.copyWith(
       dayType: null == dayType
@@ -82,7 +81,7 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
           ? _value.timelines
           : timelines // ignore: cast_nullable_to_non_nullable
               as List<TimelineState>,
-      bottomSheetState: null == bottomSheetState
+      bottomSheetState: freezed == bottomSheetState
           ? _value.bottomSheetState
           : bottomSheetState // ignore: cast_nullable_to_non_nullable
               as BottomSheetState,
@@ -94,14 +93,6 @@ class _$ClockUiStateCopyWithImpl<$Res, $Val extends ClockUiState>
   $ClockStateCopyWith<$Res> get clockState {
     return $ClockStateCopyWith<$Res>(_value.clockState, (value) {
       return _then(_value.copyWith(clockState: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $BottomSheetStateCopyWith<$Res> get bottomSheetState {
-    return $BottomSheetStateCopyWith<$Res>(_value.bottomSheetState, (value) {
-      return _then(_value.copyWith(bottomSheetState: value) as $Val);
     });
   }
 }
@@ -123,8 +114,6 @@ abstract class _$$ClockUiStateImplCopyWith<$Res>
 
   @override
   $ClockStateCopyWith<$Res> get clockState;
-  @override
-  $BottomSheetStateCopyWith<$Res> get bottomSheetState;
 }
 
 /// @nodoc
@@ -142,7 +131,7 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
     Object? timetable = freezed,
     Object? clockState = null,
     Object? timelines = null,
-    Object? bottomSheetState = null,
+    Object? bottomSheetState = freezed,
   }) {
     return _then(_$ClockUiStateImpl(
       dayType: null == dayType
@@ -161,7 +150,7 @@ class __$$ClockUiStateImplCopyWithImpl<$Res>
           ? _value._timelines
           : timelines // ignore: cast_nullable_to_non_nullable
               as List<TimelineState>,
-      bottomSheetState: null == bottomSheetState
+      bottomSheetState: freezed == bottomSheetState
           ? _value.bottomSheetState
           : bottomSheetState // ignore: cast_nullable_to_non_nullable
               as BottomSheetState,
@@ -216,13 +205,18 @@ class _$ClockUiStateImpl implements _ClockUiState {
                 other.clockState == clockState) &&
             const DeepCollectionEquality()
                 .equals(other._timelines, _timelines) &&
-            (identical(other.bottomSheetState, bottomSheetState) ||
-                other.bottomSheetState == bottomSheetState));
+            const DeepCollectionEquality()
+                .equals(other.bottomSheetState, bottomSheetState));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, dayType, timetable, clockState,
-      const DeepCollectionEquality().hash(_timelines), bottomSheetState);
+  int get hashCode => Object.hash(
+      runtimeType,
+      dayType,
+      timetable,
+      clockState,
+      const DeepCollectionEquality().hash(_timelines),
+      const DeepCollectionEquality().hash(bottomSheetState));
 
   @JsonKey(ignore: true)
   @override
@@ -401,152 +395,6 @@ abstract class _ClockState implements ClockState {
   @override
   @JsonKey(ignore: true)
   _$$ClockStateImplCopyWith<_$ClockStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$BottomSheetState {
-  StationName get selectedStation => throw _privateConstructorUsedError;
-  List<StationName> get stations => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $BottomSheetStateCopyWith<BottomSheetState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $BottomSheetStateCopyWith<$Res> {
-  factory $BottomSheetStateCopyWith(
-          BottomSheetState value, $Res Function(BottomSheetState) then) =
-      _$BottomSheetStateCopyWithImpl<$Res, BottomSheetState>;
-  @useResult
-  $Res call({StationName selectedStation, List<StationName> stations});
-}
-
-/// @nodoc
-class _$BottomSheetStateCopyWithImpl<$Res, $Val extends BottomSheetState>
-    implements $BottomSheetStateCopyWith<$Res> {
-  _$BottomSheetStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? selectedStation = null,
-    Object? stations = null,
-  }) {
-    return _then(_value.copyWith(
-      selectedStation: null == selectedStation
-          ? _value.selectedStation
-          : selectedStation // ignore: cast_nullable_to_non_nullable
-              as StationName,
-      stations: null == stations
-          ? _value.stations
-          : stations // ignore: cast_nullable_to_non_nullable
-              as List<StationName>,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$BottomSheetStateImplCopyWith<$Res>
-    implements $BottomSheetStateCopyWith<$Res> {
-  factory _$$BottomSheetStateImplCopyWith(_$BottomSheetStateImpl value,
-          $Res Function(_$BottomSheetStateImpl) then) =
-      __$$BottomSheetStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({StationName selectedStation, List<StationName> stations});
-}
-
-/// @nodoc
-class __$$BottomSheetStateImplCopyWithImpl<$Res>
-    extends _$BottomSheetStateCopyWithImpl<$Res, _$BottomSheetStateImpl>
-    implements _$$BottomSheetStateImplCopyWith<$Res> {
-  __$$BottomSheetStateImplCopyWithImpl(_$BottomSheetStateImpl _value,
-      $Res Function(_$BottomSheetStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? selectedStation = null,
-    Object? stations = null,
-  }) {
-    return _then(_$BottomSheetStateImpl(
-      selectedStation: null == selectedStation
-          ? _value.selectedStation
-          : selectedStation // ignore: cast_nullable_to_non_nullable
-              as StationName,
-      stations: null == stations
-          ? _value._stations
-          : stations // ignore: cast_nullable_to_non_nullable
-              as List<StationName>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$BottomSheetStateImpl implements _BottomSheetState {
-  _$BottomSheetStateImpl(
-      {required this.selectedStation,
-      required final List<StationName> stations})
-      : _stations = stations;
-
-  @override
-  final StationName selectedStation;
-  final List<StationName> _stations;
-  @override
-  List<StationName> get stations {
-    if (_stations is EqualUnmodifiableListView) return _stations;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_stations);
-  }
-
-  @override
-  String toString() {
-    return 'BottomSheetState(selectedStation: $selectedStation, stations: $stations)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BottomSheetStateImpl &&
-            (identical(other.selectedStation, selectedStation) ||
-                other.selectedStation == selectedStation) &&
-            const DeepCollectionEquality().equals(other._stations, _stations));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, selectedStation,
-      const DeepCollectionEquality().hash(_stations));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BottomSheetStateImplCopyWith<_$BottomSheetStateImpl> get copyWith =>
-      __$$BottomSheetStateImplCopyWithImpl<_$BottomSheetStateImpl>(
-          this, _$identity);
-}
-
-abstract class _BottomSheetState implements BottomSheetState {
-  factory _BottomSheetState(
-      {required final StationName selectedStation,
-      required final List<StationName> stations}) = _$BottomSheetStateImpl;
-
-  @override
-  StationName get selectedStation;
-  @override
-  List<StationName> get stations;
-  @override
-  @JsonKey(ignore: true)
-  _$$BottomSheetStateImplCopyWith<_$BottomSheetStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
