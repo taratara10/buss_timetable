@@ -24,6 +24,17 @@ class DefaultTimetableRepository implements TimetableRepository {
         return Failure(Exception("Not found"));
     }
   }
+
+  @override
+  StationName getSelectedStationName() {
+    // TODO: implement getSelectedStationName
+    return StationName("田喜野井");
+  }
+
+  @override
+  void updateSelectedStationName({required StationName stationName}) {
+    // TODO: implement updateSelectedStationName
+  }
 }
 
 List<Timetable> _takinoi = [
