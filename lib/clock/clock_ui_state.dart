@@ -4,7 +4,7 @@ import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'clock_ui_state.freezed.dart';
+part '../_generated/clock/clock_ui_state.freezed.dart';
 
 /// 下記のコマンドで生成
 /// `dart run build_runner build`

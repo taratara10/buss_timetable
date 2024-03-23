@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'timetable_view_model.dart';
+part of '../../timetable/timetable_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
