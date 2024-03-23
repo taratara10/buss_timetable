@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:buss_timetable/clock/timeline_section.dart';
 import 'package:buss_timetable/domain/timetable_repository.dart';
 import 'package:buss_timetable/model/day_type.dart';
 import 'package:buss_timetable/model/station_name.dart';
@@ -8,6 +9,8 @@ import 'package:buss_timetable/repository/default_timetable_repository.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'clock_bottom_sheet.dart';
+import 'clock_card_section.dart';
 import 'clock_ui_state.dart';
 
 final clockViewModelNotifierProvider =
@@ -36,13 +39,13 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
       state = ClockUiState(
         dayType: clock.dayType,
         timetable: currentDayTypeTimetable,
-        clockState: ClockState.empty().updateClockState(
+        clockCardState: ClockCardState.of(
           nextTimeline: timelines.firstOrNull,
           now: clock.now(),
         ),
         timelines: timelines,
         // todo 仮
-        bottomSheetState: BottomSheetState(
+        bottomSheetState: ClockBottomSheetState(
           selectedStation: StationName('津田沼'),
           stations: [
             StationName('津田沼'),
@@ -76,7 +79,7 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
 
         // それ以外はclockのみ再計算
         state = state.copyWith(
-          clockState: state.clockState.updateClockState(
+          clockCardState: ClockCardState.of(
             nextTimeline: state.timelines.firstOrNull,
             now: now,
           ),

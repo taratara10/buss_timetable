@@ -1,0 +1,13 @@
+# dart run build_runner build
+# 上記のコマンドで自動生成されるファイルの出力先を変更する
+targets:
+  $default:
+    builders:
+      source_gen|combining_builder:
+        options:
+          build_extensions:
+            '^lib/{{}}.dart': 'lib/_generated/{{}}.g.dart'
+      freezed:
+        options:
+          build_extensions:
+            '^lib/{{}}.dart': 'lib/_generated/{{}}.freezed.dart'

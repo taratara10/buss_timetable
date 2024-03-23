@@ -4,7 +4,7 @@ import 'package:buss_timetable/model/timetable.dart';
 import 'package:buss_timetable/timetable/timetable_ui_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'timetable_view_model.g.dart';
+part '../_generated/timetable/timetable_view_model.g.dart';
 
 @riverpod
 class TimetableViewModel extends _$TimetableViewModel {

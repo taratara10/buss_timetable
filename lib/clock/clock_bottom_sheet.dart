@@ -1,8 +1,19 @@
+import 'package:buss_timetable/model/station_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'clock_ui_state.dart';
 import 'clock_view_model.dart';
+
+part '../_generated/clock/clock_bottom_sheet.freezed.dart';
+
+@freezed
+class ClockBottomSheetState with _$ClockBottomSheetState {
+  factory ClockBottomSheetState({
+    required StationName selectedStation,
+    required List<StationName> stations,
+  }) = _ClockBottomSheetState;
+}
 
 void showClockBottomSheet(BuildContext context) {
   showModalBottomSheet(
@@ -67,7 +78,7 @@ class _StationList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.read(clockViewModelNotifierProvider.notifier);
-    final BottomSheetState state =
+    final ClockBottomSheetState state =
         ref.watch(clockViewModelNotifierProvider).bottomSheetState;
 
     return ListView(
