@@ -21,25 +21,20 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.2.0 <4.0.0'
 
-# Dependencies specify other packages that your package needs in order to work.
-# To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`. Alternatively,
-# dependencies can be manually updated by changing the version numbers below to
-# the latest version available on pub.dev. To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
     sdk: flutter
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_riverpod: ^2.4.10
-  # the annotation package containing @riverpod
   riverpod_annotation: ^2.3.4
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
+  # テスト容易にするためのDateTimeのwrapper
   clock: ^1.1.1
+  # Result型
   result_dart: ^1.1.0
+  shared_preferences: ^2.2.2
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:

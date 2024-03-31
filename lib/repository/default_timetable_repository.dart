@@ -2,15 +2,19 @@ import 'package:buss_timetable/domain/timetable_repository.dart';
 import 'package:buss_timetable/model/day_type.dart';
 import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
+import 'package:buss_timetable/repository/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:result_dart/src/result.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final timetableRepositoryProvider = Provider<TimetableRepository>(
-  (_) => DefaultTimetableRepository(),
+  (ref) => DefaultTimetableRepository(ref.watch(sharedPreferencesProvider)),
 );
 
 class DefaultTimetableRepository implements TimetableRepository {
-  DefaultTimetableRepository();
+  DefaultTimetableRepository(this.sharedPref);
+
+  final SharedPreferences sharedPref;
 
   @override
   Result<List<Timetable>, Exception> getTimetable({
@@ -20,21 +24,24 @@ class DefaultTimetableRepository implements TimetableRepository {
       case "田喜野井":
         return Success(_takinoi);
       case "津田沼_津08":
-        return Success(_takinoi);
+        return Success(_tsudanuma);
       default:
         return Failure(Exception("Not found"));
     }
   }
 
   @override
-  StationName getSelectedStationName() {
-    // TODO: implement getSelectedStationName
-    return StationName("田喜野井");
+  StationName? getSelectedStationName() {
+    String? name = sharedPref.getString(PreferenceKey.selectedStationName.name);
+    return (name != null) ? StationName(name) : null;
   }
 
   @override
   void updateSelectedStationName({required StationName stationName}) {
-    // TODO: implement updateSelectedStationName
+    sharedPref.setString(
+      PreferenceKey.selectedStationName.name,
+      stationName.value,
+    );
   }
 }
 
