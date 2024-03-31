@@ -98,17 +98,8 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
     _timer.cancel();
   }
 
-  void onTap(StationName name) {
+  void updateSelectedStation(StationName name) {
     _timetableRepository.updateSelectedStationName(stationName: name);
     init();
-    // // save selecting station in preference
-    // // get station timetable
-    // // update uiState
-    //
-    // // todo
-    // state = state.copyWith(
-    //   bottomSheetState: state.bottomSheetState.copyWith(selectedStation: name),
-    // );
-    print('--ss aaaa $name');
   }
 }
