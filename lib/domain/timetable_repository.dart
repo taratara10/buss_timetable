@@ -8,7 +8,7 @@ abstract interface class TimetableRepository {
     required StationName stationName,
   });
 
-  StationName getSelectedStationName();
+  StationName? getSelectedStationName();
 
   void updateSelectedStationName({
     required StationName stationName,

@@ -7,6 +7,7 @@ import 'package:buss_timetable/model/station_name.dart';
 import 'package:buss_timetable/model/timetable.dart';
 import 'package:buss_timetable/repository/default_timetable_repository.dart';
 import 'package:clock/clock.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'clock_bottom_sheet.dart';
@@ -28,10 +29,13 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
   }
 
   void init() {
-    StationName current = _timetableRepository.getSelectedStationName();
+    StationName current =
+        _timetableRepository.getSelectedStationName() ?? StationName('田喜野井');
     _timetableRepository.getTimetable(stationName: current).onSuccess((result) {
-      Timetable currentDayTypeTimetable =
-          result.firstWhere((item) => item.dayType == clock.dayType);
+      Timetable? currentDayTypeTimetable =
+          result.firstWhereOrNull((item) => item.dayType == clock.dayType);
+      // todo エラー画面を出したい
+      if (currentDayTypeTimetable == null) return;
       List<TimelineState> timelines = currentDayTypeTimetable.toTimelineState(
         now: clock.now(),
         numberOfResult: 4,
@@ -46,9 +50,9 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
         timelines: timelines,
         // todo 仮
         bottomSheetState: ClockBottomSheetState(
-          selectedStation: StationName('津田沼'),
+          selectedStation: current,
           stations: [
-            StationName('津田沼'),
+            StationName('津田沼_津08'),
             StationName('田喜野井'),
           ],
         ),
@@ -94,15 +98,8 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
     _timer.cancel();
   }
 
-  void onTap(StationName name) {
-    // save selecting station in preference
-    // get station timetable
-    // update uiState
-
-    // todo
-    state = state.copyWith(
-      bottomSheetState: state.bottomSheetState.copyWith(selectedStation: name),
-    );
-    print('--ss aaaa $name');
+  void updateSelectedStation(StationName name) {
+    _timetableRepository.updateSelectedStationName(stationName: name);
+    init();
   }
 }

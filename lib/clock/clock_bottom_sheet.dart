@@ -85,15 +85,16 @@ class _StationList extends ConsumerWidget {
       children: state.stations.map((station) {
         return GestureDetector(
           onTap: () {
-            viewModel.onTap(station);
+            viewModel.updateSelectedStation(station);
+            Navigator.pop(context);
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Row(
               children: [
                 Radio(
-                  value: station,
-                  groupValue: state.selectedStation,
+                  value: station.value,
+                  groupValue: state.selectedStation.value,
                   onChanged: (_) {},
                 ),
                 const SizedBox(width: 8),
