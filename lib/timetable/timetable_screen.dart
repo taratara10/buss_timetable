@@ -47,7 +47,8 @@ class _AppBarTitle extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final StationName title = ref.watch(timetableViewModelProvider).stationName;
+    final StationName title =
+        ref.watch(timetableViewModelNotifierProvider).stationName;
     return Text(title.value);
   }
 }
@@ -57,13 +58,14 @@ class _TimetablePager extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final TimetableUiState state = ref.watch(timetableViewModelProvider);
-    final viewModel = ref.read(timetableViewModelProvider.notifier);
+    final TimetableUiState state =
+        ref.watch(timetableViewModelNotifierProvider);
+    final viewModel = ref.read(timetableViewModelNotifierProvider.notifier);
     final controller = PageController(initialPage: state.pageIndex);
 
     /// TimetableUiStateの値が変化したら、呼び出される
     /// _TimetableIndicatorで変更されたindexにpageを遷移させる
-    ref.listen(timetableViewModelProvider, (previous, next) {
+    ref.listen(timetableViewModelNotifierProvider, (previous, next) {
       controller.animateToPage(
         next.pageIndex,
         duration: const Duration(milliseconds: 500),
@@ -91,8 +93,9 @@ class _TimetableIndicator extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final TimetableUiState state = ref.watch(timetableViewModelProvider);
-    final viewModel = ref.read(timetableViewModelProvider.notifier);
+    final TimetableUiState state =
+        ref.watch(timetableViewModelNotifierProvider);
+    final viewModel = ref.read(timetableViewModelNotifierProvider.notifier);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 48),
       child: Row(
