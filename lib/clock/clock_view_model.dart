@@ -24,11 +24,12 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
   late Timer _timer;
 
   ClockViewModel(this._timetableRepository) : super(ClockUiState.empty()) {
-    init();
-    startTimer();
+    _init();
+    _startTimer();
   }
 
-  void init() {
+  void _init() {
+    // todo defaultはどうしようか
     StationName current =
         _timetableRepository.getSelectedStationName() ?? StationName('田喜野井');
     _timetableRepository.getTimetable(stationName: current).onSuccess((result) {
@@ -60,7 +61,7 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
     }).onFailure((failure) {});
   }
 
-  void startTimer() {
+  void _startTimer() {
     _timer = Timer.periodic(
       // 第一引数 実行間隔
       const Duration(milliseconds: 500),
@@ -100,6 +101,6 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
 
   void updateSelectedStation(StationName name) {
     _timetableRepository.updateSelectedStationName(stationName: name);
-    init();
+    _init();
   }
 }

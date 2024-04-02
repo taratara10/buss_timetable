@@ -11,4 +11,12 @@ class TimetableUiState with _$TimetableUiState {
     required int pageIndex,
     required List<Timetable> timetables,
   }) = _TimetableUiState;
+
+  factory TimetableUiState.empty() {
+    return TimetableUiState(
+      stationName: StationName(''),
+      pageIndex: 0,
+      timetables: List.empty(),
+    );
+  }
 }
