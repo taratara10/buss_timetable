@@ -1,6 +1,7 @@
 import 'package:buss_timetable/clock/clock_view_model.dart';
 import 'package:buss_timetable/clock/timeline_section.dart';
 import 'package:buss_timetable/extension/int_extenstion.dart';
+import 'package:buss_timetable/util/app_lifecycle_state_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -68,15 +69,21 @@ class ClockCardSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(clockViewModelNotifierProvider).clockCardState;
     final viewModel = ref.read(clockViewModelNotifierProvider.notifier);
-    final ClockCardState state =
-        ref.watch(clockViewModelNotifierProvider).clockCardState;
-    // todo
-    final autoDisposeProvider = Provider.autoDispose((ref) {
-      ref.onDispose(() {
-        viewModel.cancelTimer();
-      });
-    });
+    // Detecting app foreground and background to control a timer.
+    ref.listen<AppLifecycleState>(
+      appLifecycleProvider,
+      (previous, next) {
+        switch (next) {
+          case AppLifecycleState.resumed:
+            viewModel.startTimer();
+          case AppLifecycleState.paused:
+            viewModel.stopTImer();
+          default:
+        }
+      },
+    );
 
     return Container(
       decoration: BoxDecoration(
