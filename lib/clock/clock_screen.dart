@@ -17,6 +17,10 @@ class ClockRoute extends StatelessWidget {
         title: const _AppBarTitle(),
         backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
       ),
+      bottomNavigationBar: const Padding(
+        padding: EdgeInsets.only(bottom: 16),
+        child: ClockFooterSection(),
+      ),
       body: const Center(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
@@ -25,13 +29,12 @@ class ClockRoute extends StatelessWidget {
             children: [
               ClockCardSection(),
               SizedBox(height: 32),
+              // todo scrollable
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: TimelineSection(),
               ),
               Expanded(child: SizedBox()),
-              ClockFooterSection(),
-              SizedBox(height: 16),
             ],
           ),
         ),
