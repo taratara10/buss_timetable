@@ -20,16 +20,22 @@ class TimetableRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const _AppBarTitle()),
-      body: const Stack(
-        alignment: AlignmentDirectional.bottomCenter,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 42),
-            child: _TimetablePager(),
-          ),
-          _TimetableIndicator(),
-        ],
+      appBar: AppBar(
+        title: const _AppBarTitle(),
+        backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+      ),
+      body: const Padding(
+        padding: EdgeInsets.only(top: 16),
+        child: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 42),
+              child: _TimetablePager(),
+            ),
+            _TimetableIndicator(),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
