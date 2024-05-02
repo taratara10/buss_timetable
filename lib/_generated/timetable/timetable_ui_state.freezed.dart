@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TimetableUiState {
   StationName get stationName => throw _privateConstructorUsedError;
   int get pageIndex => throw _privateConstructorUsedError;
+  int get pageIndexLastUpdatedTime => throw _privateConstructorUsedError;
   List<Timetable> get timetables => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,7 +33,10 @@ abstract class $TimetableUiStateCopyWith<$Res> {
       _$TimetableUiStateCopyWithImpl<$Res, TimetableUiState>;
   @useResult
   $Res call(
-      {StationName stationName, int pageIndex, List<Timetable> timetables});
+      {StationName stationName,
+      int pageIndex,
+      int pageIndexLastUpdatedTime,
+      List<Timetable> timetables});
 }
 
 /// @nodoc
@@ -50,6 +54,7 @@ class _$TimetableUiStateCopyWithImpl<$Res, $Val extends TimetableUiState>
   $Res call({
     Object? stationName = null,
     Object? pageIndex = null,
+    Object? pageIndexLastUpdatedTime = null,
     Object? timetables = null,
   }) {
     return _then(_value.copyWith(
@@ -60,6 +65,10 @@ class _$TimetableUiStateCopyWithImpl<$Res, $Val extends TimetableUiState>
       pageIndex: null == pageIndex
           ? _value.pageIndex
           : pageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      pageIndexLastUpdatedTime: null == pageIndexLastUpdatedTime
+          ? _value.pageIndexLastUpdatedTime
+          : pageIndexLastUpdatedTime // ignore: cast_nullable_to_non_nullable
               as int,
       timetables: null == timetables
           ? _value.timetables
@@ -78,7 +87,10 @@ abstract class _$$TimetableUiStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {StationName stationName, int pageIndex, List<Timetable> timetables});
+      {StationName stationName,
+      int pageIndex,
+      int pageIndexLastUpdatedTime,
+      List<Timetable> timetables});
 }
 
 /// @nodoc
@@ -94,6 +106,7 @@ class __$$TimetableUiStateImplCopyWithImpl<$Res>
   $Res call({
     Object? stationName = null,
     Object? pageIndex = null,
+    Object? pageIndexLastUpdatedTime = null,
     Object? timetables = null,
   }) {
     return _then(_$TimetableUiStateImpl(
@@ -104,6 +117,10 @@ class __$$TimetableUiStateImplCopyWithImpl<$Res>
       pageIndex: null == pageIndex
           ? _value.pageIndex
           : pageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      pageIndexLastUpdatedTime: null == pageIndexLastUpdatedTime
+          ? _value.pageIndexLastUpdatedTime
+          : pageIndexLastUpdatedTime // ignore: cast_nullable_to_non_nullable
               as int,
       timetables: null == timetables
           ? _value._timetables
@@ -119,6 +136,7 @@ class _$TimetableUiStateImpl implements _TimetableUiState {
   _$TimetableUiStateImpl(
       {required this.stationName,
       required this.pageIndex,
+      required this.pageIndexLastUpdatedTime,
       required final List<Timetable> timetables})
       : _timetables = timetables;
 
@@ -126,6 +144,8 @@ class _$TimetableUiStateImpl implements _TimetableUiState {
   final StationName stationName;
   @override
   final int pageIndex;
+  @override
+  final int pageIndexLastUpdatedTime;
   final List<Timetable> _timetables;
   @override
   List<Timetable> get timetables {
@@ -136,7 +156,7 @@ class _$TimetableUiStateImpl implements _TimetableUiState {
 
   @override
   String toString() {
-    return 'TimetableUiState(stationName: $stationName, pageIndex: $pageIndex, timetables: $timetables)';
+    return 'TimetableUiState(stationName: $stationName, pageIndex: $pageIndex, pageIndexLastUpdatedTime: $pageIndexLastUpdatedTime, timetables: $timetables)';
   }
 
   @override
@@ -148,12 +168,19 @@ class _$TimetableUiStateImpl implements _TimetableUiState {
                 other.stationName == stationName) &&
             (identical(other.pageIndex, pageIndex) ||
                 other.pageIndex == pageIndex) &&
+            (identical(
+                    other.pageIndexLastUpdatedTime, pageIndexLastUpdatedTime) ||
+                other.pageIndexLastUpdatedTime == pageIndexLastUpdatedTime) &&
             const DeepCollectionEquality()
                 .equals(other._timetables, _timetables));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, stationName, pageIndex,
+  int get hashCode => Object.hash(
+      runtimeType,
+      stationName,
+      pageIndex,
+      pageIndexLastUpdatedTime,
       const DeepCollectionEquality().hash(_timetables));
 
   @JsonKey(ignore: true)
@@ -168,12 +195,15 @@ abstract class _TimetableUiState implements TimetableUiState {
   factory _TimetableUiState(
       {required final StationName stationName,
       required final int pageIndex,
+      required final int pageIndexLastUpdatedTime,
       required final List<Timetable> timetables}) = _$TimetableUiStateImpl;
 
   @override
   StationName get stationName;
   @override
   int get pageIndex;
+  @override
+  int get pageIndexLastUpdatedTime;
   @override
   List<Timetable> get timetables;
   @override

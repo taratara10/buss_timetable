@@ -30,12 +30,21 @@ class TimetableViewModel extends StateNotifier<TimetableUiState> {
     state = TimetableUiState(
       stationName: current,
       pageIndex: _getPageIndex(timetables, clock),
+      pageIndexLastUpdatedTime: 0,
       timetables: timetables,
     );
   }
 
   void updatePageIndex(int index) {
-    state = state.copyWith(pageIndex: index);
+    int elapsedTime =
+        (clock.now().millisecondsSinceEpoch - state.pageIndexLastUpdatedTime);
+    // 2つ以上のページを遷移時にPageView#onChangedが発火してしまう
+    // pageIndexを更新してから100ms以内の処理は意図しないイベントなので破棄する
+    if (elapsedTime < 100) return;
+    state = state.copyWith(
+      pageIndex: index,
+      pageIndexLastUpdatedTime: clock.now().millisecondsSinceEpoch,
+    );
   }
 
   int _getPageIndex(List<Timetable> timetables, Clock clock) {
