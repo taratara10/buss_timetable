@@ -77,10 +77,7 @@ class _TimetablePager extends ConsumerWidget {
       controller: controller,
       itemCount: state.timetables.length,
       onPageChanged: (int page) {
-        // 2つ以上のページを遷移時に意図せぬタイミングで更新されてしまうのを防ぐ
-        if ((state.pageIndex == page)) {
-          viewModel.updatePageIndex(page);
-        }
+        viewModel.updatePageIndex(page);
       },
       itemBuilder: (context, index) {
         return Padding(
@@ -99,6 +96,7 @@ class _TimetableIndicator extends ConsumerWidget {
     final TimetableUiState state =
         ref.watch(timetableViewModelNotifierProvider);
     final viewModel = ref.read(timetableViewModelNotifierProvider.notifier);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 48),
       child: Row(
