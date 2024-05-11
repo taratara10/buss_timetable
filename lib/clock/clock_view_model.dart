@@ -76,7 +76,7 @@ class ClockViewModel extends StateNotifier<ClockUiState> {
           // minの変わり目は、全体を再計算
           state = state.copyWith(
             timelines: timetable.toTimelineState(
-              numberOfResult: 4,
+              numberOfResult: 3,
               now: now,
             ),
           );
