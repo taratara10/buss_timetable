@@ -1,16 +1,18 @@
-# buss_timetable
+# bus_timetable
 
-A new Flutter project.
+## About
 
-## Getting Started
+- My first practice Flutter app.
+- This app is designed to present bus schedules at the nearest station in a rich format.
+- For personal use only, and it only registers my nearest station.
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- Displays a countdown to the departure time of the bus.
+    - <img src="https://github.com/taratara10/buss_timetable/assets/64339483/09a2b2fb-e2fb-4159-a052-2f14251e2d8a" width="400px">
+- Displays the bus timetable.
+    - ![timetable](https://github.com/taratara10/buss_timetable/assets/64339483/ca940cb2-d925-450b-a1e6-754bfe1aa3af)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Architecture
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- MVVM architecture based on Riverpod.
